@@ -37,3 +37,4 @@ Node 22 is required to build (the project pins Astro 5.18.2, which supports Node
 - No custom domain.
 
 _(GitHub -> Vercel auto-deploy check, 2026-10-25T07:45:47Z)_
+_(check 2, 07:48:39Z)_
