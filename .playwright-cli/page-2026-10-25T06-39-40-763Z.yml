@@ -1,0 +1,230 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "Dhanushka Dilshan" [ref=e3] [cursor=pointer]:
+      - /url: "#top"
+    - navigation [ref=e4]:
+      - link "Work" [ref=e5] [cursor=pointer]:
+        - /url: "#work"
+      - link "Writing" [ref=e6] [cursor=pointer]:
+        - /url: "#writing"
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - img "Portrait of Dhanushka Dilshan" [ref=e9]
+      - heading "DHANUSHKA DILSHAN" [level=1] [ref=e10]:
+        - generic [ref=e11]: DHANUSHKA
+        - generic [ref=e12]: DILSHAN
+      - generic [ref=e13]:
+        - paragraph [ref=e14]: Backend engineer in Colombo, Sri Lanka. I build the APIs behind XAPI, a platform for data, API and AI governance.
+        - link "Get in touch" [ref=e15] [cursor=pointer]:
+          - /url: mailto:dhanushkadilshancc@gmail.com?subject=Hello%2C%20from%20your%20portfolio
+    - generic [ref=e16]:
+      - paragraph [ref=e17]:
+        - generic [ref=e18]: I build APIs that
+        - generic [ref=e19]: show where data
+        - generic [ref=e20]: comes from, where
+        - generic [ref=e21]: it goes and which
+        - generic [ref=e22]: rules apply.
+      - generic [ref=e23]:
+        - img "Cursor-based pagination through a list, from the GraphQL in Practice series" [ref=e24]
+        - img "A batched DataLoader request replacing many database calls, from the GraphQL in Practice series" [ref=e25]
+      - paragraph [ref=e26]: Stills from GraphQL in Practice, the video series I publish on LinkedIn.
+    - generic [ref=e27]:
+      - heading "Selected work" [level=2] [ref=e28]
+      - article [ref=e29]:
+        - 'img "An example data-lineage map: a source connects to a data model, a dataset and a system" [ref=e31]'
+        - img "A GraphQL query beside a database log, from the GraphQL in Practice series" [ref=e33]
+        - heading "LINEAGE" [level=3]:
+          - generic [aria-hidden]: LINEAGE
+        - generic [ref=e34]:
+          - paragraph [ref=e35]: GraphQL API and data map, 2026
+          - paragraph [ref=e36]: Business Lineage is an interactive map of how data flows between sources, data models, datasets and systems, and which classifications, policies and compliance rules apply. I designed and built it, with a Spring for GraphQL API that loads neighbouring nodes in batches, pages through large graphs with cursors and caps the size of a single request.
+      - article [ref=e37]:
+        - img [ref=e40]:
+          - generic [ref=e42]: Source
+          - generic [ref=e44]: Data Model
+          - generic [ref=e46]: Dataset
+          - generic [ref=e48]: ER-style data model
+        - img [ref=e51]:
+          - generic [ref=e53]: "field: customerId → String"
+          - generic [ref=e55]: "field: email → String"
+          - generic [ref=e57]: "field: country → String"
+          - generic [ref=e59]: "relationship: hasMany Orders"
+          - generic [ref=e60]: Datasets, fields and relationships
+        - heading "GOVERNANCE" [level=3]:
+          - generic [aria-hidden]: GOVERNANCE
+        - generic [ref=e61]:
+          - paragraph [ref=e62]: Data governance APIs, 2025–2026
+          - paragraph [ref=e63]: "The core of XAPI's data governance: REST APIs that let an organization catalog its data sources and model them as ER-style data models, with datasets, fields and relationships. Every API started as an OpenAPI contract, so the frontend could build against it in parallel."
+      - article [ref=e64]:
+        - img [ref=e67]:
+          - generic [ref=e69]: Service A
+          - generic [ref=e71]: Service B
+          - generic [ref=e73]: Caffeine cache
+          - generic [ref=e77]: RabbitMQ
+          - generic [ref=e78]: Cache kept in sync across instances
+        - img [ref=e81]:
+          - generic [ref=e82]: Role
+          - generic [ref=e83]: Read
+          - generic [ref=e84]: Write
+          - generic [ref=e85]: Service A
+          - generic [ref=e88]: Service B
+          - generic [ref=e91]: Service C
+          - generic [ref=e94]: Service D
+          - generic [ref=e97]: Role-based access control
+        - heading "ACCESS" [level=3]:
+          - generic [aria-hidden]: ACCESS
+        - generic [ref=e98]:
+          - paragraph [ref=e99]: Security and performance, 2025–2026
+          - paragraph [ref=e100]: "I hardened role-based access control across six or more microservices and fixed a flaw that could leak one user's session data into another request. Then I made authorization faster: permissions load in batches, sit in an in-memory Caffeine cache, and stay in sync across service instances through RabbitMQ."
+      - article [ref=e101]:
+        - img [ref=e104]:
+          - generic [ref=e110]: Course video, enrolled learners only
+        - img [ref=e113]:
+          - generic [ref=e116]: Signed
+          - generic [ref=e117]: cookie
+          - generic [ref=e119]: CloudFront
+          - generic [ref=e120]: Access granted only with a valid signature
+        - heading "STREAMING" [level=3]:
+          - generic [aria-hidden]: STREAMING
+        - generic [ref=e121]:
+          - paragraph [ref=e122]: Full-stack, XCLP, 2025
+          - paragraph [ref=e123]: For XCLP, the company's compliance learning platform, I built secure video streaming with AWS CloudFront signed cookies, so only enrolled learners can watch a course. I also built course, enrollment and authentication features in Spring Boot and Angular.
+      - article [ref=e124]:
+        - img [ref=e127]:
+          - generic [ref=e132]: $ kubectl logs xapi-core-7f
+          - generic [ref=e133]: tracing error to resolver...
+          - generic [ref=e134]: "→ found: DataLoader timeout"
+          - generic [ref=e135]: $ _
+          - generic [ref=e136]: An agent tracing a bug to its service
+        - img [ref=e139]:
+          - generic [ref=e141]: MCP
+          - generic [ref=e144]: catalog
+          - generic [ref=e147]: lineage
+          - generic [ref=e150]: governance
+          - generic [ref=e153]: logs
+          - generic [ref=e154]: Platform features exposed as MCP tools
+        - heading "AGENTS" [level=3]:
+          - generic [aria-hidden]: AGENTS
+        - generic [ref=e155]:
+          - paragraph [ref=e156]: AI-assisted engineering, 2026
+          - paragraph [ref=e157]: I set up an engineering workflow on Claude Code, with custom skills, subagents and Kubernetes MCP servers that let AI agents read production logs and trace a bug to the service responsible, with guardrails on production access. I also extended XAPI's MCP server so AI assistants can use platform features as tools.
+    - generic [ref=e158]:
+      - heading "GraphQL in Practice" [level=2] [ref=e159]
+      - generic [ref=e160]:
+        - heading "Ask for exactly what you need" [level=3] [ref=e161]
+        - paragraph [ref=e162]: Tick the fields you want. The response changes shape to match, the way GraphQL does.
+        - generic [ref=e163]:
+          - group "Fields to request" [ref=e164]:
+            - generic [ref=e166] [cursor=pointer]:
+              - checkbox "name" [checked] [ref=e167]
+              - text: name
+            - generic [ref=e168] [cursor=pointer]:
+              - checkbox "role" [checked] [ref=e169]
+              - text: role
+            - generic [ref=e170] [cursor=pointer]:
+              - checkbox "stack" [ref=e171]
+              - text: stack
+            - generic [ref=e172] [cursor=pointer]:
+              - checkbox "projects" [ref=e173]
+              - text: projects
+            - generic [ref=e174] [cursor=pointer]:
+              - checkbox "writing" [ref=e175]
+              - text: writing
+          - generic [ref=e176]:
+            - code [ref=e178]: "query { name role{'}'}"
+            - code [ref=e180]: "{ \"name\": \"Dhanushka Dilshan\", \"role\": \"Backend Software Engineer\" }"
+      - generic [ref=e181]:
+        - generic [ref=e182]:
+          - paragraph [ref=e183]: October 2026
+          - generic [ref=e184]:
+            - generic [ref=e185]: Why GraphQL
+            - generic [ref=e186]: Video, 0:30
+            - generic [ref=e187]: One screen, two ways
+            - generic [ref=e188]: Oct 22
+          - generic [ref=e189]:
+            - generic [ref=e190]: The Schema
+            - generic [ref=e191]: Video, 0:39
+            - generic [ref=e192]: The contract
+            - generic [ref=e193]: Oct 24
+          - generic [ref=e194]:
+            - generic [ref=e195]: Resolvers
+            - generic [ref=e196]: Video, 0:44
+            - generic [ref=e197]: Field by field
+            - generic [ref=e198]: Oct 26
+          - generic [ref=e199]:
+            - generic [ref=e200]: The N+1 problem
+            - generic [ref=e201]: Video, 0:42
+            - generic [ref=e202]: Watch the database log
+            - generic [ref=e203]: Oct 28
+          - generic [ref=e204]:
+            - generic [ref=e205]: DataLoader
+            - generic [ref=e206]: Video, 0:38
+            - generic [ref=e207]: 101 queries become 2
+            - generic [ref=e208]: Oct 30
+        - generic [ref=e209]:
+          - paragraph [ref=e210]: November 2026
+          - generic [ref=e211]:
+            - generic [ref=e212]: Securing GraphQL
+            - generic [ref=e213]: Video, 0:44
+            - generic [ref=e214]: Depth and complexity limits
+            - generic [ref=e215]: Nov 1
+          - generic [ref=e216]:
+            - generic [ref=e217]: Pagination
+            - generic [ref=e218]: Video, 0:46
+            - generic [ref=e219]: One page at a time
+            - generic [ref=e220]: Nov 3
+          - generic [ref=e221]:
+            - generic [ref=e222]: Business Lineage
+            - generic [ref=e223]: Video, 0:51
+            - generic [ref=e224]: Where it all came together
+            - generic [ref=e225]: Nov 5
+    - generic [ref=e227]:
+      - heading "Contract first, then the code" [level=2] [ref=e228]: Contract first,then the code
+      - img "Dhanushka Dilshan" [ref=e229]
+      - generic [ref=e230]:
+        - heading "How I work" [level=3] [ref=e231]
+        - paragraph [ref=e232]: I write each API as an OpenAPI contract before the code, so other teams can build in parallel. Every feature ships with JUnit and Mockito tests, a SonarQube check and an 80% coverage target, in Agile sprints. Day to day I use Java, Spring Boot, Spring for GraphQL, Spring Security, RabbitMQ, Kubernetes and AWS.
+      - generic [ref=e233]:
+        - heading "How I got here" [level=3] [ref=e234]
+        - paragraph [ref=e235]: I studied Computer Science at the University of Colombo School of Computing and joined X-Venture as an intern in November 2024. Six months later I joined full time, building XAPI.
+        - generic [ref=e236]:
+          - link "Get in touch" [ref=e237] [cursor=pointer]:
+            - /url: mailto:dhanushkadilshancc@gmail.com
+          - link "Download CV" [ref=e238] [cursor=pointer]:
+            - /url: /Dhanushka_Dilshan_CV.pdf
+    - generic [ref=e239]:
+      - paragraph [ref=e240]: Hiring for a backend or GraphQL role? Write to me.
+      - link "dhanushkadilshancc@gmail.com" [ref=e241] [cursor=pointer]:
+        - /url: mailto:dhanushkadilshancc@gmail.com
+      - paragraph [ref=e242]: Colombo, Sri Lanka
+      - navigation [ref=e243]:
+        - link "LinkedIn" [ref=e244] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/dhanushkacc/
+        - link "GitHub" [ref=e245] [cursor=pointer]:
+          - /url: https://github.com/dhanushkacc
+        - link "Download CV" [ref=e246] [cursor=pointer]:
+          - /url: /Dhanushka_Dilshan_CV.pdf
+  - contentinfo [ref=e247]:
+    - img "Hoek York Street and Chatham Street, Colombo, an archival photograph of the city" [ref=e248]
+    - navigation [ref=e250]:
+      - link "Work" [ref=e251] [cursor=pointer]:
+        - /url: "#work"
+      - link "Writing" [ref=e252] [cursor=pointer]:
+        - /url: "#writing"
+      - link "About" [ref=e253] [cursor=pointer]:
+        - /url: "#about"
+      - link "Contact" [ref=e254] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=e255]:
+      - link "dhanushkadilshancc@gmail.com" [ref=e256] [cursor=pointer]:
+        - /url: mailto:dhanushkadilshancc@gmail.com
+      - link "linkedin.com/in/dhanushkacc" [ref=e257] [cursor=pointer]:
+        - /url: https://www.linkedin.com/in/dhanushkacc/
+      - link "github.com/dhanushkacc" [ref=e258] [cursor=pointer]:
+        - /url: https://github.com/dhanushkacc
+    - heading "DHANUSHKA DILSHAN" [level=2] [ref=e259]
+    - paragraph [ref=e260]:
+      - text: "© 2026 Dhanushka Dilshan. Picture:"
+      - link "“Hoek York Street en Chatham Street, Colombo”" [ref=e261] [cursor=pointer]:
+        - /url: https://commons.wikimedia.org/w/index.php?curid=85210909
+      - text: ", Rijksmuseum, CC0, via Wikimedia Commons."

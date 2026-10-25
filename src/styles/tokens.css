@@ -1,0 +1,97 @@
+/* Design tokens for "the dark room" direction, with the proportions the skill dealt
+   (one ground, one ink, one accent) but the colours taken from the GraphQL in Practice
+   video series, so the site and the series read as one brand. */
+:root {
+  --bg: #0b1327;
+  --surface: #121c36;
+  --surface-2: #17213f;
+  --ink: #eef1f5;
+  --muted: #93a1b8;
+  --accent: #2dd4bf;
+  --accent-ink: #06201c;
+  --field-1: #eef1f5;
+  --field-1-ink: #0b1327;
+
+  --radius: 0; /* square corners, as the direction's house rules default to */
+  --margin: clamp(20px, 4vw, 48px);
+  --gap-section: clamp(96px, 14vw, 220px);
+
+  /* Five type steps. Everything on the page maps onto one of these. */
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --step-lead: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  --step-head: clamp(2.25rem, 1.3rem + 4.2vw, 4.5rem);
+  --step-display: clamp(3.5rem, 0.8rem + 11vw, 11rem);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; }
+html { background: var(--bg); color-scheme: dark; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-size: var(--step-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: 'Zodiak', Georgia, serif; font-weight: 300; margin: 0; }
+p { margin: 0; }
+a { color: inherit; }
+img, video { max-width: 100%; display: block; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.section-head {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
+  margin: 0 0 clamp(40px, 6vw, 72px);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.9em 1.6em;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--step-small);
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), background 220ms var(--ease-out);
+}
+.btn:hover, .btn:focus-visible { background: #4fe3d1; transform: translateY(-2px); }
+.btn:active { transform: translateY(0); }
+
+.link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--muted);
+  transition: text-decoration-color 200ms var(--ease-out);
+}
+.link:hover, .link:focus-visible { text-decoration-color: var(--accent); }
+
+.credits {
+  font-size: var(--step-small);
+  color: var(--muted);
+}
+.credits a { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+.reveal { opacity: 0; transform: translateY(28px); }
+.reveal.is-in {
+  opacity: 1; transform: none;
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.is-in { opacity: 1; transform: none; }
+}
