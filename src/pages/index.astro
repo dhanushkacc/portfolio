@@ -207,8 +207,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
         </section>
 
         <section class="sec about" id="about" data-stage="about" data-caption="Dhanushka Dilshan, Colombo" aria-labelledby="about-h">
-          <img class="about__face" src="/media/portrait-face.jpg" width="176" height="176" alt="" data-reveal />
-          <h2 class="head" id="about-h" data-reveal style="--d:60ms">Contract first,<br />then the code</h2>
+          <h2 class="head" id="about-h" data-reveal>Contract first,<br />then the code</h2>
           <div class="about__letter">
             <p data-reveal>I write each API as an OpenAPI contract before the code, so the frontend can build against it the same day.</p>
             <p data-reveal style="--d:60ms">Every feature ships with JUnit and Mockito tests, a SonarQube check and an 80% coverage target. Day to day that means Java, Spring Boot, Spring for GraphQL, Spring Security, RabbitMQ, Kubernetes and AWS.</p>
@@ -392,7 +391,6 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     .demo__pane--out { color: var(--accent); }
 
     /* ---------- about ---------- */
-    .about__face { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin-bottom: 28px; }
     .about__letter { margin-top: 36px; max-width: 46ch; display: grid; gap: 1.1em; }
     .about__sign { margin-top: 36px; display: flex; flex-direction: column; gap: 4px; }
     .about__actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; padding-bottom: var(--gap-section); }
