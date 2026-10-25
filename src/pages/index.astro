@@ -1,6 +1,5 @@
 ---
 import '../styles/tokens.css';
-import { DRAWINGS } from '../scripts/drawings.js';
 
 const email = 'dhanushkadilshancc@gmail.com';
 const linkedin = 'https://www.linkedin.com/in/dhanushkacc/';
@@ -21,39 +20,43 @@ const series = [
   { title: 'Business Lineage', format: 'Video, 0:51', topic: 'Where it all came together', date: 'Nov 5', group: 'November 2026' },
 ];
 
-const work = [
+// The work section is one connected graph, in the same node/edge language as Business
+// Lineage itself: a hub (the Lineage feature) with four spokes, each carrying a real,
+// specific relationship label back to it — the page's structure becomes the idea.
+const hub = {
+  id: 'lineage', name: 'LINEAGE',
+  line: 'GraphQL API and data map, 2026',
+  text: "Business Lineage is an interactive map of how data flows between sources, data models, datasets and systems, and which classifications, policies and compliance rules apply. I designed and built it, with a Spring for GraphQL API that loads neighbouring nodes in batches, pages through large graphs with cursors and caps the size of a single request.",
+  img: '/media/still-map.jpg', alt: 'An example data-lineage map: a source connects to a data model, a dataset and a system',
+  intro: "Four more projects connect to it below. Open one to see how.",
+};
+const spokes = [
   {
-    id: 'lineage', name: 'LINEAGE', ink: 'var(--accent)',
-    line: 'GraphQL API and data map, 2026',
-    text: "Business Lineage is an interactive map of how data flows between sources, data models, datasets and systems, and which classifications, policies and compliance rules apply. I designed and built it, with a Spring for GraphQL API that loads neighbouring nodes in batches, pages through large graphs with cursors and caps the size of a single request.",
-    imgA: '/media/still-map.jpg', altA: 'An example data-lineage map: a source connects to a data model, a dataset and a system',
-    imgB: '/media/still-log.jpg', altB: 'A GraphQL query beside a database log, from the GraphQL in Practice series',
-  },
-  {
-    id: 'governance', name: 'GOVERNANCE', ink: '#eef1f5',
+    id: 'governance', name: 'GOVERNANCE', relation: 'feeds the map',
     line: 'Data governance APIs, 2025–2026',
-    text: "The core of XAPI's data governance: REST APIs that let an organization catalog its data sources and model them as ER-style data models, with datasets, fields and relationships. Every API started as an OpenAPI contract, so the frontend could build against it in parallel.",
-    draw: 'er',
+    text: "The core of XAPI's data governance: REST APIs that let an organization catalog its data sources and model them as ER-style data models, with datasets, fields and relationships. Every API started as an OpenAPI contract, so the frontend could build against it in parallel. This is the data Business Lineage draws its map from.",
+    img: '/media/node-governance.png', alt: 'A GraphQL type for a data model, with its source, datasets, fields and relationships',
   },
   {
-    id: 'access', name: 'ACCESS', ink: '#eef1f5',
+    id: 'access', name: 'ACCESS', relation: 'secures every node',
     line: 'Security and performance, 2025–2026',
-    text: "I hardened role-based access control across six or more microservices and fixed a flaw that could leak one user's session data into another request. Then I made authorization faster: permissions load in batches, sit in an in-memory Caffeine cache, and stay in sync across service instances through RabbitMQ.",
-    draw: 'cache',
+    text: "I hardened role-based access control across six or more microservices and fixed a flaw that could leak one user's session data into another request. Then I made authorization faster: permissions load in batches, sit in an in-memory Caffeine cache, and stay in sync across service instances through RabbitMQ. The same checks guard every node Lineage shows.",
+    img: '/media/node-access.png', alt: 'A permission cache check, and a count of six or more hardened microservices',
   },
   {
-    id: 'streaming', name: 'STREAMING', ink: '#eef1f5',
+    id: 'streaming', name: 'STREAMING', relation: 'same platform',
     line: 'Full-stack, XCLP, 2025',
-    text: "For XCLP, the company's compliance learning platform, I built secure video streaming with AWS CloudFront signed cookies, so only enrolled learners can watch a course. I also built course, enrollment and authentication features in Spring Boot and Angular.",
-    draw: 'player',
+    text: "For XCLP, the company's compliance learning platform, I built secure video streaming with AWS CloudFront signed cookies, so only enrolled learners can watch a course. I also built course, enrollment and authentication features in Spring Boot and Angular — the same stack and the same access rules as the governance platform.",
+    img: '/media/node-streaming.png', alt: 'A video player frame beside a signed-cookie code snippet',
   },
   {
-    id: 'agents', name: 'AGENTS', ink: 'var(--accent)',
+    id: 'agents', name: 'AGENTS', relation: 'traces it live',
     line: 'AI-assisted engineering, 2026',
-    text: "I set up an engineering workflow on Claude Code, with custom skills, subagents and Kubernetes MCP servers that let AI agents read production logs and trace a bug to the service responsible, with guardrails on production access. I also extended XAPI's MCP server so AI assistants can use platform features as tools.",
-    draw: 'agent',
+    text: "I set up an engineering workflow on Claude Code, with custom skills, subagents and Kubernetes MCP servers that let AI agents read production logs and trace a bug to the service responsible, with guardrails on production access. I also extended XAPI's MCP server so AI assistants can use platform features, lineage included, as tools.",
+    img: '/media/node-agents.png', alt: 'A terminal tracing a production error back to the responsible resolver',
   },
 ];
+const work = [hub, ...spokes];
 ---
 
 <!doctype html>
@@ -108,30 +111,46 @@ const work = [
       </div>
     </section>
 
-    <!-- 3. WORK -->
+    <!-- 3. WORK: one lineage graph — a hub and four spokes, the same shape as the feature itself -->
     <section class="work" id="work">
       <h2 class="section-head work__head reveal">Selected work</h2>
-      {work.map((p) => (
-        <article class="work__item reveal" data-tear>
-          <div class="work__pictures">
-            <div class="work__pane work__pane--a">
-              {p.imgA
-                ? <img src={p.imgA} width="720" height="900" loading="lazy" alt={p.altA} />
-                : <div class="draw" aria-hidden="true" set:html={DRAWINGS[p.draw]?.a} />}
+      <div class="graph" data-graph>
+        <svg class="graph__lines" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+          {spokes.map((s, i) => (
+            <line class="graph__line" data-to={s.id}
+              x1="500" y1="170"
+              x2={125 + i * 250} y2="460"></line>
+          ))}
+        </svg>
+        <button class="node node--hub reveal" type="button" data-node={hub.id} aria-expanded="true" aria-controls="node-detail">
+          <img src={hub.img} width="640" height="400" loading="lazy" alt={hub.alt} />
+          <span class="node--hub__text">
+            <span class="node__name">{hub.name}</span>
+            <span class="node__intro">{hub.intro}</span>
+          </span>
+        </button>
+        <div class="graph__spokes">
+          {spokes.map((s, i) => (
+            <button class="node node--spoke reveal" style={`transition-delay:${i * 90}ms`} type="button" data-node={s.id} aria-expanded="false" aria-controls="node-detail">
+              <img src={s.img} width="500" height="400" loading="lazy" alt={s.alt} />
+              <span class="node__name">{s.name}</span>
+              <span class="node__relation">{s.relation}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="detail" id="node-detail" aria-live="polite">
+        {work.map((p) => (
+          <div class="detail__panel" data-detail={p.id} hidden={p.id !== hub.id}>
+            <div class="detail__copy">
+              <h3 class="detail__title">{p.name}</h3>
+              <p class="detail__line">{p.line}</p>
+              <p class="detail__text">{p.text}</p>
             </div>
-            <div class="work__pane work__pane--b">
-              {p.imgB
-                ? <img src={p.imgB} width="720" height="900" loading="lazy" alt={p.altB} />
-                : <div class="draw" aria-hidden="true" set:html={DRAWINGS[p.draw]?.b} />}
-            </div>
+            <img class="detail__image" src={p.img} width="640" height="480" loading="lazy" alt={p.alt} />
           </div>
-          <h3 class="work__title" style={`color:${p.ink}`} data-tear-target>{p.name}</h3>
-          <div class="work__meta">
-            <p class="work__line">{p.line}</p>
-            <p class="work__text">{p.text}</p>
-          </div>
-        </article>
-      ))}
+        ))}
+      </div>
     </section>
 
     <!-- 4. WRITING: live demo + series table -->
@@ -235,7 +254,7 @@ const work = [
 
   <script src="/scripts/reveal.js" type="module"></script>
   <script src="/scripts/query-demo.js" type="module"></script>
-  <script src="/scripts/work-tear.js" type="module"></script>
+  <script src="/scripts/graph.js" type="module"></script>
 
   <style>
     .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -329,42 +348,67 @@ const work = [
       .intro__note { width: 100%; }
     }
 
-    /* 3. WORK — pictures, then the title strip, then the text: nothing overlaps,
-       so the title and the caption are never covered (the inspector checks this). */
+    /* 3. WORK — one lineage graph: a hub node and four spokes, connected by lines,
+       each a real button that opens its write-up in the shared panel below. */
     .work { background: var(--bg); padding: var(--gap-section) 0 0; }
-    .work__head { padding: 0 var(--margin); }
-    .work__item {
-      margin-top: clamp(64px, 9vw, 120px);
+    .work__head { padding: 0 var(--margin); margin-bottom: clamp(48px, 7vw, 96px); }
+    .graph { position: relative; padding: 0 var(--margin); }
+    .graph__lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .graph__line { stroke: var(--surface-2); stroke-width: 1.5; transition: stroke 0.3s var(--ease-out); }
+    .graph__line.is-active { stroke: var(--accent); }
+    .node {
+      display: block; width: 100%; text-align: left;
+      background: none; border: 0; padding: 0; color: inherit; cursor: pointer;
+      font: inherit;
     }
-    .work__pictures {
-      display: grid; grid-template-columns: 1fr 1fr;
-      height: 58svh;
+    .node__name {
+      display: block; margin-top: 14px;
+      font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.01em;
     }
-    .work__pane { position: relative; overflow: hidden; background: var(--surface); }
-    .work__pane img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: brightness(0.8) saturate(0.9); }
-    .work__title {
-      padding: 20px var(--margin) 0;
-      font-size: clamp(48px, 8vw, 120px);
-      line-height: 0.85;
-      letter-spacing: -0.03em;
-      font-weight: 300;
+    .node__relation { display: block; margin-top: 4px; font-size: var(--step-small); color: var(--muted); }
+    .node img {
+      display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top;
+      background: var(--surface); filter: brightness(0.85) saturate(0.95);
+      outline: 1.5px solid var(--surface-2); outline-offset: -1.5px;
+      transition: outline-color 0.3s var(--ease-out), filter 0.3s var(--ease-out);
     }
-    .work__meta {
-      padding: 14px var(--margin) 0; max-width: 60ch;
-      display: flex; flex-direction: column; gap: 10px;
+    .node:hover img, .node.is-active img { outline-color: var(--accent); filter: brightness(1) saturate(1); }
+    .node--hub {
+      position: relative; z-index: 1; width: 100%;
+      display: grid; grid-template-columns: minmax(260px, 1fr) 1.3fr;
+      gap: clamp(32px, 4.5vw, 64px); align-items: center;
     }
-    .work__line { font-size: var(--step-small); color: var(--muted); }
-    .work__text { font-size: var(--step-body); color: var(--ink); }
+    .node--hub__text { display: flex; flex-direction: column; gap: 14px; }
+    .node--hub .node__name { font-size: var(--step-head); }
+    .node__intro { font-size: var(--step-lead); color: var(--muted); max-width: 32ch; }
+    .graph__spokes {
+      position: relative; z-index: 1; margin-top: clamp(72px, 11vw, 160px);
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.4vw, 32px);
+    }
+    .detail {
+      margin-top: clamp(56px, 8vw, 100px); padding: clamp(32px, 4.5vw, 56px) var(--margin) clamp(48px,6vw,88px);
+      background: var(--surface);
+    }
+    .detail__panel {
+      display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 4.5vw, 64px); align-items: center;
+    }
+    .detail__panel[hidden] { display: none; }
+    .detail__copy { max-width: 60ch; }
+    .detail__title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .detail__line { font-size: var(--step-small); color: var(--muted); margin-bottom: 18px; }
+    .detail__text { font-size: var(--step-body); color: var(--ink); }
+    .detail__image {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top;
+      background: var(--bg); outline: 1.5px solid var(--surface-2); outline-offset: -1.5px;
+    }
     @media (max-width: 760px) {
-      .work__pictures { grid-template-columns: 1fr; height: auto; }
-      .work__pane { height: 38vh; }
-      .work__title { font-size: 14vw; padding: 20px 16px 0; }
-      .work__meta { padding: 10px 16px 0; max-width: none; }
+      .graph__lines { display: none; }
+      .node--hub { grid-template-columns: 1fr; text-align: left; }
+      .graph__spokes { grid-template-columns: 1fr 1fr; margin-top: 32px; }
+      .detail { padding: 28px 16px; }
+      .detail__panel { grid-template-columns: 1fr; }
+      .detail__image { order: -1; }
     }
-
-    /* Drawn illustrations for projects with no footage */
-    .draw { width: 100%; height: 100%; background: var(--surface); position: relative; }
-    .draw svg { width: 100%; height: 100%; }
 
     /* 4. WRITING */
     .writing { padding: var(--gap-section) var(--margin) clamp(48px,6vw,88px); background: var(--bg); }
@@ -443,9 +487,10 @@ const work = [
       min-height: 100svh;
       background: var(--field-1); color: var(--field-1-ink);
       position: relative;
+      display: flex; flex-direction: column; justify-content: center; gap: clamp(32px, 6vh, 64px);
       padding: var(--margin) var(--margin) clamp(120px, 16vh, 180px);
     }
-    .contact__ask { max-width: 24ch; font-size: var(--step-lead); margin-bottom: 14vh; }
+    .contact__ask { max-width: 24ch; font-size: var(--step-lead); }
     .contact__email {
       font-family: 'Zodiak', serif; font-weight: 100;
       font-size: clamp(28px, 6.5vw, 96px);
@@ -463,7 +508,7 @@ const work = [
     .contact__links { position: absolute; right: var(--margin); bottom: var(--margin); display: flex; gap: 20px; font-size: var(--step-small); }
     .contact .link { color: var(--field-1-ink); text-decoration-color: #0b132780; }
     @media (max-width: 760px) {
-      .contact__email { font-size: 8vw; margin-top: 8svh; }
+      .contact__email { font-size: 8vw; }
       .contact__city, .contact__links { position: static; margin-top: 24px; }
       .contact { padding: 16px; }
     }
@@ -477,7 +522,17 @@ const work = [
       grid-template-rows: auto 1fr auto;
       padding: var(--margin);
     }
-    .footer__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
+    .footer__photo {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6);
+      animation: footer-drift 24s ease-in-out infinite alternate;
+    }
+    @keyframes footer-drift {
+      from { transform: scale(1); }
+      to { transform: scale(1.06); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .footer__photo { animation: none; }
+    }
     /* Two flat bands instead of a gradient, so the top and bottom text stay legible and the middle of the photograph stays clear. */
     .footer__scrim { position: absolute; left: 0; right: 0; background: rgba(11,19,39,0.6); }
     .footer__scrim--top { top: 0; height: 22%; }
