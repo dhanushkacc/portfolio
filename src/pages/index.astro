@@ -259,25 +259,26 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     </section>
   </main>
 
-  <!-- FOOTER: the last frame of the series on one half, the menu on the other -->
+  <!-- FOOTER: one quiet close across the full width -->
   <footer class="footer">
-    <div class="footer__film">
-      <video muted loop playsinline preload="none" poster={F + 'ep8-map.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep8-map.mp4'} type="video/mp4" /></video>
+    <div class="footer__top">
+      <p class="footer__name"><span class="lead">Dhanushka Dilshan</span><span class="small muted">Backend engineer, Colombo</span></p>
+      <nav class="footer__links" aria-label="Footer">
+        <a class="link" href="#work">Work</a>
+        <a class="link" href="#graphql-series">GraphQL series</a>
+        <a class="link" href="#about">About</a>
+        <a class="link" href="#contact">Contact</a>
+        <a class="link" href={cvHref}>CV</a>
+      </nav>
     </div>
-    <div class="footer__menu">
-      <p class="footer__mark small">Dhanushka Dilshan</p>
-      <ul class="footer__links">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#graphql-series">GraphQL series</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href={cvHref}>CV</a></li>
-      </ul>
-      <div class="footer__blocks small">
-        <p><a class="link" href={mailto}>{email}</a><br />Colombo, Sri Lanka</p>
-        <p><a class="link" href={linkedin}>LinkedIn</a><br /><a class="link" href={github}>GitHub</a></p>
-      </div>
-      <p class="footer__legal small muted">© 2026 Dhanushka Dilshan. The videos and photographs are my own.</p>
+    <div class="footer__bottom small">
+      <p class="muted">© 2026 Dhanushka Dilshan. The videos and photographs are my own.</p>
+      <p class="footer__social">
+        <a class="link" href={mailto}>Email</a>
+        <a class="link" href={linkedin}>LinkedIn</a>
+        <a class="link" href={github}>GitHub</a>
+        <a class="link" href="#top">Back to top</a>
+      </p>
     </div>
   </footer>
 
@@ -421,19 +422,12 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     .contact__rows dd { margin: 0; overflow-wrap: anywhere; }
 
     /* ---------- footer ---------- */
-    .footer { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
-    .footer__film { background: var(--stage); display: flex; align-items: center; justify-content: center; padding: clamp(24px, 4vw, 64px); overflow: clip; }
-    .footer__film video { width: 100%; max-height: 100%; aspect-ratio: 1; object-fit: contain; }
-    .footer__menu { background: var(--surface); display: flex; flex-direction: column; padding: clamp(32px, 5vw, 80px) var(--pad); }
-    .footer__mark { color: var(--muted); }
-    .footer__links { margin-top: clamp(32px, 6svh, 64px); display: grid; gap: clamp(8px, 1.4svh, 16px); }
-    .footer__links a { display: inline-block; font-size: var(--step-head); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; text-decoration: none; transition: transform var(--t-ui) var(--ease-out), color var(--t-hover) ease; }
-    @media (hover: hover) and (pointer: fine) {
-      .footer__links:hover a { color: var(--muted); }
-      .footer__links a:hover { color: var(--ink); transform: translateX(12px); }
-    }
-    .footer__blocks { margin-top: 64px; display: flex; gap: 48px; flex-wrap: wrap; }
-    .footer__legal { margin-top: auto; padding-top: 48px; }
+    .footer { background: var(--bg); padding: clamp(56px, 7vw, 96px) var(--pad) clamp(32px, 4vw, 48px); }
+    .footer__top { display: flex; justify-content: space-between; align-items: flex-start; gap: 32px 48px; flex-wrap: wrap; }
+    .footer__name { display: flex; flex-direction: column; gap: 4px; }
+    .footer__links { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+    .footer__bottom { margin-top: clamp(48px, 6vw, 80px); display: flex; justify-content: space-between; align-items: baseline; gap: 16px 48px; flex-wrap: wrap; }
+    .footer__social { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 
     /* ---------- phone and narrow tablet: a composition of its own ---------- */
     @media (max-width: 1023px) {
@@ -461,12 +455,10 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       .contact { padding: 96px 20px 112px; }
       .contact__rows { margin-top: 56px; }
       .contact__rows div { grid-template-columns: 1fr; gap: 2px; }
-      .footer { grid-template-columns: 1fr; min-height: 0; }
-      .footer__film { padding: 20px; }
-      .footer__film video { max-width: 560px; }
-      .footer__menu { padding: 40px 20px 32px; }
-      .footer__links a { font-size: clamp(2rem, 9vw, 3rem); }
-      .footer__blocks { margin-top: 40px; gap: 24px; flex-direction: column; }
+      .footer { padding: 56px 20px 32px; }
+      .footer__links a, .footer__social a { min-height: 44px; display: inline-flex; align-items: center; }
+      .footer__links { gap: 0 18px; font-size: var(--step-small); }
+      .footer__social { gap: 0 20px; }
     }
     @media (min-width: 700px) and (max-width: 1023px) {
       .project { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; align-content: center; max-width: none; }

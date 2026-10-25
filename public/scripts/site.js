@@ -70,7 +70,7 @@
   }
 
   // Phone and narrow tablet: every film plays only while it is on screen.
-  const inline = [...document.querySelectorAll('.m-film video, .footer__film video')];
+  const inline = [...document.querySelectorAll('.m-film video')];
   const seen = new Set();
   const syncInline = () => {
     for (const v of inline) {
