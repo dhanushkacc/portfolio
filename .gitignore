@@ -8,3 +8,6 @@ assets/source/
 assets/photo/_*
 .playwright-cli/
 review-hero*.png
+
+.vercel
+.env*
