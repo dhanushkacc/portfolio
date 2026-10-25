@@ -78,7 +78,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
           <nav class="nav small" aria-label="Sections">
             <div class="nav__links">
               <a class="link" href="#work">Work</a>
-              <a class="link" href="#films">Films</a>
+              <a class="link" href="#graphql-series">GraphQL series</a>
               <a class="link" href="#about">About</a>
               <a class="link" href="#contact">Contact</a>
             </div>
@@ -110,7 +110,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
             <p class="intro__first" data-reveal>I build the APIs that show where an organization's data comes from, where it goes and which rules apply to it.</p>
             <p data-reveal style="--d:80ms">At X-Venture I work on XAPI, a platform for data, API and AI governance: catalogs, data models, lineage and access control.</p>
             <p data-reveal style="--d:160ms">I write each API as a contract first and care about what a request costs: how many queries it makes, whether it hits the cache, how large it is allowed to get.</p>
-            <p data-reveal style="--d:240ms">When something is hard to explain, I make a short film about it. <a class="link" href="#films">Watch the films</a></p>
+            <p data-reveal style="--d:240ms">When something is hard to explain, I make a short video about it. <a class="link" href="#graphql-series">Watch the GraphQL series</a></p>
           </div>
         </section>
 
@@ -151,17 +151,17 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       </div>
     </div>
 
-    <!-- SCENE: the eight films open from a window to the whole screen -->
-    <section class="scene series" id="films" data-scene="opening" data-options='{"hold":1.4}' aria-labelledby="films-h">
+    <!-- SCENE: the eight videos open from a window to the whole screen -->
+    <section class="scene series" id="graphql-series" data-scene="opening" data-options='{"hold":1.4}' aria-labelledby="films-h">
       <div class="scene-stage series__stage">
-        <ol class="series__cards" aria-label="The eight films">
+        <ol class="series__cards" aria-label="The eight videos">
           {series.map((s) => (
             <li class="series__card" data-move><img src={F + 'ep' + s.n + '.jpg'} width="720" height="720" loading="lazy" alt={'Part ' + s.n + ', ' + s.title} /></li>
           ))}
         </ol>
         <div class="series__text" data-move>
           <h2 class="head" id="films-h">GraphQL in Practice</h2>
-          <p class="lead series__lead">Eight short animated films I made on GraphQL with Spring, from the first query to the feature they add up to.</p>
+          <p class="lead series__lead">Eight short animated videos I made on GraphQL with Spring, from the first query to the feature they add up to.</p>
         </div>
       </div>
     </section>
@@ -268,7 +268,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       <p class="footer__mark small">Dhanushka Dilshan</p>
       <ul class="footer__links">
         <li><a href="#work">Work</a></li>
-        <li><a href="#films">Films</a></li>
+        <li><a href="#graphql-series">GraphQL series</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href={cvHref}>CV</a></li>
@@ -277,7 +277,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
         <p><a class="link" href={mailto}>{email}</a><br />Colombo, Sri Lanka</p>
         <p><a class="link" href={linkedin}>LinkedIn</a><br /><a class="link" href={github}>GitHub</a></p>
       </div>
-      <p class="footer__legal small muted">© 2026 Dhanushka Dilshan. The films and photographs are my own.</p>
+      <p class="footer__legal small muted">© 2026 Dhanushka Dilshan. The videos and photographs are my own.</p>
     </div>
   </footer>
 
