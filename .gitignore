@@ -11,3 +11,5 @@ review-hero*.png
 
 .vercel
 .env*
+assets/old-media/
+AUDIT-live.md.bak

@@ -5,60 +5,51 @@ const email = 'dhanushkadilshancc@gmail.com';
 const linkedin = 'https://www.linkedin.com/in/dhanushkacc/';
 const github = 'https://github.com/dhanushkacc';
 const cvHref = '/Dhanushka_Dilshan_CV.pdf';
-const mailtoHero = 'mailto:' + email + '?subject=' + encodeURIComponent('Hello, from your portfolio');
-const mailtoPlain = 'mailto:' + email;
-const [emailUser, emailHost] = email.split('@');
+const mailto = 'mailto:' + email + '?subject=' + encodeURIComponent('Hello, from your portfolio');
+
+const F = '/media/films/';
+
+const projects = [
+  {
+    id: 'lineage', name: 'Business Lineage', tags: 'GraphQL, data map', meta: 'GraphQL API and data map, 2026', film: 'ep8-map', start: 0,
+    caption: 'Business Lineage, from the finale',
+    text: "An interactive map of how data flows between sources, data models, datasets and systems, and which classifications, policies and compliance rules apply on the way. I designed and built it on Spring for GraphQL: neighbouring nodes load in batches, large graphs page through with cursors, and a size limit stops any one request from loading it all.",
+  },
+  {
+    id: 'governance', name: 'Data governance core', tags: 'REST, OpenAPI', meta: 'REST APIs, contract first, 2025 to 2026', film: 'governance', start: 2.6,
+    caption: 'Data governance APIs',
+    text: "The APIs at the centre of XAPI's data governance. They let an organization catalog its data sources and model them as ER-style data models, with datasets, fields and relationships. Every endpoint started as an OpenAPI contract, so the frontend team could build against it the same day.",
+  },
+  {
+    id: 'access', name: 'Access and cache', tags: 'Security, speed', meta: 'Security and performance, 2025 to 2026', film: 'access', start: 2.6,
+    caption: 'Six services, one cache',
+    text: "I hardened role-based access control across six or more microservices and closed a flaw that could leak one user's session data into another request. Then I made the checks fast: permissions load in batches, sit in an in-memory Caffeine cache, and stay in sync across service instances through RabbitMQ.",
+  },
+  {
+    id: 'streaming', name: 'XCLP streaming', tags: 'Full-stack, AWS', meta: 'Spring Boot and Angular, 2025', film: 'streaming', start: 2.6,
+    caption: 'Signed, not shared',
+    text: "For XCLP, the company's compliance learning platform, I built secure course video with AWS CloudFront signed cookies, so only enrolled learners can watch. Around it I built the course, enrollment and sign-in features in Spring Boot and Angular.",
+  },
+  {
+    id: 'agents', name: 'AI-assisted engineering', tags: 'Claude Code, MCP', meta: 'Skills, subagents and MCP servers, 2026', film: 'agents', start: 2.6,
+    caption: 'Tools for the assistant',
+    text: "I set up our engineering workflow on Claude Code, with custom skills, subagents and Kubernetes MCP servers that let an agent read production logs and trace a bug to the service responsible, read-only and with guardrails. I also extended XAPI's MCP server so assistants can use the platform's features as tools.",
+  },
+];
 
 const series = [
-  { title: 'Why GraphQL', format: 'Video, 0:30', topic: 'One screen, two ways', date: 'Oct 22', group: 'October 2026' },
-  { title: 'The Schema', format: 'Video, 0:39', topic: 'The contract', date: 'Oct 24', group: 'October 2026' },
-  { title: 'Resolvers', format: 'Video, 0:44', topic: 'Field by field', date: 'Oct 26', group: 'October 2026' },
-  { title: 'The N+1 problem', format: 'Video, 0:42', topic: 'Watch the database log', date: 'Oct 28', group: 'October 2026' },
-  { title: 'DataLoader', format: 'Video, 0:38', topic: '101 queries become 2', date: 'Oct 30', group: 'October 2026' },
-  { title: 'Securing GraphQL', format: 'Video, 0:44', topic: 'Depth and complexity limits', date: 'Nov 1', group: 'November 2026' },
-  { title: 'Pagination', format: 'Video, 0:46', topic: 'One page at a time', date: 'Nov 3', group: 'November 2026' },
-  { title: 'Business Lineage', format: 'Video, 0:51', topic: 'Where it all came together', date: 'Nov 5', group: 'November 2026' },
+  { n: 1, title: 'Why GraphQL', topic: 'One screen, two ways', date: 'Oct 22', length: '0:30' },
+  { n: 2, title: 'The schema', topic: 'The contract', date: 'Oct 24', length: '0:39' },
+  { n: 3, title: 'Resolvers', topic: 'Field by field', date: 'Oct 26', length: '0:44' },
+  { n: 4, title: 'The N+1 problem', topic: 'Watch the database log', date: 'Oct 28', length: '0:42' },
+  { n: 5, title: 'DataLoader', topic: '101 queries become 2', date: 'Oct 30', length: '0:38' },
+  { n: 6, title: 'Securing GraphQL', topic: 'Depth and complexity limits', date: 'Nov 1', length: '0:44' },
+  { n: 7, title: 'Pagination', topic: 'One page at a time', date: 'Nov 3', length: '0:46' },
+  { n: 8, title: 'Business Lineage', topic: 'Where it all came together', date: 'Nov 5', length: '0:51' },
 ];
-
-// The work section is one connected graph, in the same node/edge language as Business
-// Lineage itself: a hub (the Lineage feature) with four spokes, each carrying a real,
-// specific relationship label back to it — the page's structure becomes the idea.
-const hub = {
-  id: 'lineage', name: 'LINEAGE',
-  line: 'GraphQL API and data map, 2026',
-  text: "Business Lineage is an interactive map of how data flows between sources, data models, datasets and systems, and which classifications, policies and compliance rules apply. I designed and built it, with a Spring for GraphQL API that loads neighbouring nodes in batches, pages through large graphs with cursors and caps the size of a single request.",
-  img: '/media/still-map.jpg', alt: 'An example data-lineage map: a source connects to a data model, a dataset and a system',
-  intro: "Four more projects connect to it below. Open one to see how.",
-};
-const spokes = [
-  {
-    id: 'governance', name: 'GOVERNANCE', relation: 'feeds the map',
-    line: 'Data governance APIs, 2025–2026',
-    text: "The core of XAPI's data governance: REST APIs that let an organization catalog its data sources and model them as ER-style data models, with datasets, fields and relationships. Every API started as an OpenAPI contract, so the frontend could build against it in parallel. This is the data Business Lineage draws its map from.",
-    img: '/media/node-governance.png', alt: 'A GraphQL type for a data model, with its source, datasets, fields and relationships',
-  },
-  {
-    id: 'access', name: 'ACCESS', relation: 'secures every node',
-    line: 'Security and performance, 2025–2026',
-    text: "I hardened role-based access control across six or more microservices and fixed a flaw that could leak one user's session data into another request. Then I made authorization faster: permissions load in batches, sit in an in-memory Caffeine cache, and stay in sync across service instances through RabbitMQ. The same checks guard every node Lineage shows.",
-    img: '/media/node-access.png', alt: 'A permission cache check, and a count of six or more hardened microservices',
-  },
-  {
-    id: 'streaming', name: 'STREAMING', relation: 'same platform',
-    line: 'Full-stack, XCLP, 2025',
-    text: "For XCLP, the company's compliance learning platform, I built secure video streaming with AWS CloudFront signed cookies, so only enrolled learners can watch a course. I also built course, enrollment and authentication features in Spring Boot and Angular — the same stack and the same access rules as the governance platform.",
-    img: '/media/node-streaming.png', alt: 'A video player frame beside a signed-cookie code snippet',
-  },
-  {
-    id: 'agents', name: 'AGENTS', relation: 'traces it live',
-    line: 'AI-assisted engineering, 2026',
-    text: "I set up an engineering workflow on Claude Code, with custom skills, subagents and Kubernetes MCP servers that let AI agents read production logs and trace a bug to the service responsible, with guardrails on production access. I also extended XAPI's MCP server so AI assistants can use platform features, lineage included, as tools.",
-    img: '/media/node-agents.png', alt: 'A terminal tracing a production error back to the responsible resolver',
-  },
-];
-const work = [hub, ...spokes];
+const firstEp = 4;
+const epCaption = (s) => `Part ${s.n}: ${s.title}`;
 ---
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -66,492 +57,442 @@ const work = [hub, ...spokes];
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dhanushka Dilshan, backend engineer</title>
   <meta name="description" content="Backend engineer in Colombo building XAPI's data governance APIs and Business Lineage with Java, Spring Boot and GraphQL." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <meta name="theme-color" content="#0a0d14" />
+  <link rel="icon" href="/favicon.png" />
+  <script is:inline>document.documentElement.classList.add('js')</script>
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@100,300,400&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/scenes/stage.css" />
+  <link rel="preload" as="image" href="/media/portrait-tech.jpg" />
 </head>
 <body>
+  <main>
 
-  <header class="nav">
-    <a class="nav__mark link" href="#top">Dhanushka Dilshan</a>
-    <nav class="nav__links">
-      <a class="link" href="#work">Work</a>
-      <a class="link" href="#writing">Writing</a>
-    </nav>
-  </header>
+    <!-- SPLIT ONE: the reading column on the left, the held stage on the right -->
+    <div class="split" data-split>
+      <div class="read">
 
-  <main id="top">
-
-    <!-- 1. HERO -->
-    <section class="hero">
-      <img class="hero__portrait" src="/media/portrait.png" width="800" height="1000" alt="Portrait of Dhanushka Dilshan" />
-      <h1 class="hero__name">
-        <span class="hero__line hero__line--1">DHANUSHKA</span>
-        <span class="hero__line hero__line--2">DILSHAN</span>
-      </h1>
-      <div class="hero__mid">
-        <p class="hero__sentence">Backend engineer in Colombo. I build the APIs behind XAPI, a platform for data, API and AI governance.</p>
-        <a class="btn hero__cta" href={mailtoHero}>Get in touch</a>
-      </div>
-    </section>
-
-    <!-- 2. INTRO: staircase statement -->
-    <section class="intro">
-      <div class="intro__col">
-        <h2 class="intro__head">APIs that show<br /><span class="intro__accent">where data goes</span></h2>
-        <p class="intro__sub">From the source it comes from to the systems and rules it passes through.</p>
-      </div>
-      <div class="intro__photos">
-        <video class="intro__clip" src="/media/finale-loop.webm" poster="/media/still-map.jpg" width="640" height="427" autoplay muted loop playsinline aria-label="The Business Lineage data map building, from the GraphQL in Practice finale"></video>
-        <img src="/media/still-batch.jpg" width="640" height="427" loading="lazy" alt="A batched DataLoader request replacing many database calls, from the GraphQL in Practice series" />
-        <p class="intro__note">Stills from GraphQL in Practice, the video series I publish on LinkedIn.</p>
-      </div>
-    </section>
-
-    <!-- 3. WORK: one lineage graph — a hub and four spokes, the same shape as the feature itself -->
-    <section class="work" id="work">
-      <h2 class="section-head work__head reveal">Selected work</h2>
-      <div class="graph" data-graph>
-        <svg class="graph__lines" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
-          {spokes.map((s, i) => (
-            <line class="graph__line" data-to={s.id}
-              x1="500" y1="170"
-              x2={125 + i * 250} y2="460"></line>
-          ))}
-        </svg>
-        <button class="node node--hub reveal" type="button" data-node={hub.id} aria-expanded="true" aria-controls="node-detail">
-          <img src={hub.img} width="640" height="400" loading="lazy" alt={hub.alt} />
-          <span class="node--hub__text">
-            <span class="node__name">{hub.name}</span>
-            <span class="node__intro">{hub.intro}</span>
-          </span>
-        </button>
-        <div class="graph__spokes">
-          {spokes.map((s, i) => (
-            <button class="node node--spoke reveal" style={`transition-delay:${i * 90}ms`} type="button" data-node={s.id} aria-expanded="false" aria-controls="node-detail">
-              <img src={s.img} width="500" height="400" loading="lazy" alt={s.alt} />
-              <span class="node__name">{s.name}</span>
-              <span class="node__relation">{s.relation}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-      <div class="detail" id="node-detail" aria-live="polite">
-        {work.map((p) => (
-          <div class="detail__panel" data-detail={p.id} hidden={p.id !== hub.id}>
-            <div class="detail__copy">
-              <h3 class="detail__title">{p.name}</h3>
-              <p class="detail__line">{p.line}</p>
-              <p class="detail__text">{p.text}</p>
+        <!-- HERO -->
+        <header class="hero" id="top" data-stage="hero" data-caption="Dhanushka Dilshan">
+          <nav class="nav small" aria-label="Sections">
+            <div class="nav__links">
+              <a class="link" href="#work">Work</a>
+              <a class="link" href="#films">Films</a>
+              <a class="link" href="#about">About</a>
+              <a class="link" href="#contact">Contact</a>
             </div>
-            <img class="detail__image" src={p.img} width="640" height="480" loading="lazy" alt={p.alt} />
+            <a class="link nav__cv" href={cvHref}>Download CV</a>
+          </nav>
+          <figure class="hero__photo m-only">
+            <img src="/media/portrait-tech.jpg" width="1024" height="1536" alt="Dhanushka Dilshan in a white shirt, arms crossed, in a dark room lit in blue" fetchpriority="high" />
+          </figure>
+          <div class="hero__body">
+            <h1 class="display lines">
+              <span class="line"><span data-line style="--i:0">Dhanushka</span></span>
+              <span class="line"><span data-line style="--i:1">Dilshan</span></span>
+            </h1>
+            <p class="lead hero__sentence" data-load style="--d:420ms">Backend engineer in Colombo. I build the GraphQL and data-governance APIs behind XAPI, at X-Venture.</p>
+            <div class="hero__actions" data-load style="--d:520ms">
+              <a class="btn" href={mailto}>Get in touch</a>
+              <a class="link" href="#work">See the work</a>
+            </div>
           </div>
-        ))}
-      </div>
-    </section>
+        </header>
 
-    <!-- 4. WRITING: live demo + series table -->
-    <section class="writing" id="writing">
-      <h2 class="section-head reveal">GraphQL in Practice</h2>
-
-      <div class="demo reveal" data-query-demo>
-        <h3 class="demo__head">Ask for exactly what you need</h3>
-        <p class="demo__sub">Tick the fields you want. The response changes shape to match, the way GraphQL does.</p>
-        <div class="demo__body">
-          <fieldset class="demo__fields">
-            <legend class="sr-only">Fields to request</legend>
-            <label><input type="checkbox" value="name" checked /> name</label>
-            <label><input type="checkbox" value="role" checked /> role</label>
-            <label><input type="checkbox" value="stack" /> stack</label>
-            <label><input type="checkbox" value="projects" /> projects</label>
-            <label><input type="checkbox" value="writing" /> writing</label>
-          </fieldset>
-          <div class="demo__panes">
-            <pre class="demo__pane"><code>query {'{'}<br />  <span data-query-fields>name{'\n'}  role</span><br />{'}'}</code></pre>
-            <pre class="demo__pane demo__pane--accent"><code data-query-output>{'{ }'}</code></pre>
+        <!-- INTRO -->
+        <section class="sec intro" id="intro" data-stage="intro" data-caption="DataLoader: 101 queries become 2">
+          <h2 class="head" data-reveal>What I build</h2>
+          <figure class="m-film m-only" data-reveal>
+            <video muted loop playsinline preload="none" poster={F + 'ep5.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep5.mp4'} type="video/mp4" /></video>
+          </figure>
+          <div class="intro__text">
+            <p class="intro__first" data-reveal>I build the APIs that show where an organization's data comes from, where it goes and which rules apply to it.</p>
+            <p data-reveal style="--d:80ms">At X-Venture I work on XAPI, a platform for data, API and AI governance: catalogs, data models, lineage and access control.</p>
+            <p data-reveal style="--d:160ms">I write each API as a contract first and care about what a request costs: how many queries it makes, whether it hits the cache, how large it is allowed to get.</p>
+            <p data-reveal style="--d:240ms">When something is hard to explain, I make a short film about it. <a class="link" href="#films">Watch the films</a></p>
           </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="table reveal">
-        {['October 2026', 'November 2026'].map((group) => (
-          <div class="table__group">
-            <p class="table__group-head">{group}</p>
-            {series.filter((s) => s.group === group).map((s) => (
-              <div class="table__row">
-                <span class="table__title">{s.title}</span>
-                <span class="table__format">{s.format}</span>
-                <span class="table__topic">{s.topic}</span>
-                <span class="table__date">{s.date}</span>
-              </div>
+        <!-- WORK -->
+        <section class="sec work" id="work" aria-labelledby="work-h">
+          <h2 class="head" id="work-h" data-reveal>Selected work</h2>
+          <ol class="index" data-reveal>
+            {projects.map((p) => (
+              <li><a class="index__row" href={'#' + p.id} data-index={p.id}><span class="index__name">{p.name}</span><span class="index__tags small">{p.tags}</span></a></li>
             ))}
+          </ol>
+          {projects.map((p) => (
+            <article class="project" id={p.id} data-stage={p.id} data-caption={p.caption}>
+              <figure class="m-film m-only" data-reveal>
+                <video muted loop playsinline preload="none" data-start={p.start} poster={F + p.film + '.jpg'} width="720" height="720" aria-hidden="true"><source src={F + p.film + '.mp4'} type="video/mp4" /></video>
+              </figure>
+              <h3 class="project__name" data-reveal>{p.name}</h3>
+              <p class="project__meta small muted" data-reveal style="--d:60ms">{p.meta}</p>
+              <p class="project__text" data-reveal style="--d:120ms">{p.text}</p>
+            </article>
+          ))}
+        </section>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        <div class="slide slide--photo is-on" data-slide="hero">
+          <img class="media" src="/media/portrait-tech.jpg" width="1024" height="1536" alt="" />
+        </div>
+        <div class="slide" data-slide="intro">
+          <div class="media film"><video muted loop playsinline preload="none" poster={F + 'ep5.jpg'} width="720" height="720"><source src={F + 'ep5.mp4'} type="video/mp4" /></video></div>
+        </div>
+        {projects.map((p) => (
+          <div class="slide" data-slide={p.id}>
+            <div class="media film"><video muted loop playsinline preload="none" data-start={p.start} poster={F + p.film + '.jpg'} width="720" height="720"><source src={F + p.film + '.mp4'} type="video/mp4" /></video></div>
           </div>
         ))}
+        <div class="stage__bar small"><span class="stage__cap" data-cap>Dhanushka Dilshan</span><span class="muted">Colombo, Sri Lanka</span></div>
+      </div>
+    </div>
+
+    <!-- SCENE: the eight films open from a window to the whole screen -->
+    <section class="scene series" id="films" data-scene="opening" data-options='{"hold":1.4}' aria-labelledby="films-h">
+      <div class="scene-stage series__stage">
+        <ol class="series__cards" aria-label="The eight films">
+          {series.map((s) => (
+            <li class="series__card" data-move><img src={F + 'ep' + s.n + '.jpg'} width="720" height="720" loading="lazy" alt={'Part ' + s.n + ', ' + s.title} /></li>
+          ))}
+        </ol>
+        <div class="series__text" data-move>
+          <h2 class="head" id="films-h">GraphQL in Practice</h2>
+          <p class="lead series__lead">Eight short animated films I made on GraphQL with Spring, from the first query to the feature they add up to.</p>
+        </div>
       </div>
     </section>
 
-    <!-- 5. ABOUT: inset panel, shaped portrait -->
-    <section class="about" id="about">
-      <div class="about__panel reveal">
-        <h2 class="about__statement">Contract first,<br />then the code</h2>
-        <img class="about__portrait" src="/media/portrait-square.jpg" width="560" height="560" loading="lazy" alt="Dhanushka Dilshan" />
-        <div class="about__col">
-          <h3 class="about__sub">How I work</h3>
-          <p class="about__p">I write each API as an OpenAPI contract before the code, so other teams can build in parallel. Every feature ships with JUnit and Mockito tests, a SonarQube check and an 80% coverage target, in Agile sprints. Day to day I use Java, Spring Boot, Spring for GraphQL, Spring Security, RabbitMQ, Kubernetes and AWS.</p>
-        </div>
-        <div class="about__col">
-          <h3 class="about__sub">How I got here</h3>
-          <p class="about__p">I studied Computer Science at the University of Colombo School of Computing and joined X-Venture as an intern in November 2024. Six months later I joined full time, building XAPI.</p>
-          <div class="about__actions">
-            <a class="btn" href={mailtoPlain}>Get in touch</a>
+    <!-- SPLIT TWO -->
+    <div class="split split--b" data-split>
+      <div class="read">
+
+        <section class="sec films" id="watch" data-stage={'ep' + firstEp} data-caption={epCaption(series[firstEp - 1])} data-films aria-labelledby="watch-h">
+          <h2 class="head" id="watch-h" data-reveal>Watch any part</h2>
+          <p class="muted films__sub" data-reveal style="--d:60ms">On LinkedIn from October 22 to November 5, 2026. Each part runs under a minute.</p>
+          <figure class="m-film m-only" data-reveal>
+            <video data-films-player muted loop playsinline preload="none" poster={F + 'ep' + firstEp + '.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep' + firstEp + '.mp4'} type="video/mp4" /></video>
+          </figure>
+          <ul class="eps" data-reveal style="--d:120ms">
+            {series.map((s) => (
+              <li>
+                <button class="ep" type="button" data-ep={s.n} data-caption={epCaption(s)} aria-pressed={s.n === firstEp ? 'true' : 'false'}>
+                  <span class="ep__dot" aria-hidden="true"></span>
+                  <span class="ep__title">{s.title}<span class="ep__topic small muted">{s.topic}</span></span>
+                  <span class="ep__date small muted">{s.date}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="sec demo" id="demo" data-stage="ep1" data-caption="Part 1: Why GraphQL" data-query-demo aria-labelledby="demo-h">
+          <h2 class="head" id="demo-h" data-reveal>Ask for exactly what you need</h2>
+          <p class="muted demo__sub" data-reveal style="--d:60ms">Tick the fields you want. The response changes shape to match, the way GraphQL does.</p>
+          <div class="demo__body" data-reveal style="--d:120ms">
+            <fieldset class="demo__fields">
+              <legend class="sr-only">Fields to request</legend>
+              <label><input type="checkbox" value="name" checked /> name</label>
+              <label><input type="checkbox" value="role" checked /> role</label>
+              <label><input type="checkbox" value="stack" /> stack</label>
+              <label><input type="checkbox" value="projects" /> projects</label>
+              <label><input type="checkbox" value="writing" /> writing</label>
+            </fieldset>
+            <pre class="demo__pane"><code set:html={'query {\n  <span data-query-fields>name\n  role</span>\n}'} /></pre>
+            <pre class="demo__pane demo__pane--out"><code data-query-output>{'{ }'}</code></pre>
+          </div>
+        </section>
+
+        <section class="sec about" id="about" data-stage="about" data-caption="Dhanushka Dilshan, Colombo" aria-labelledby="about-h">
+          <img class="about__face" src="/media/portrait-face.jpg" width="176" height="176" alt="" data-reveal />
+          <h2 class="head" id="about-h" data-reveal style="--d:60ms">Contract first,<br />then the code</h2>
+          <div class="about__letter">
+            <p data-reveal>I write each API as an OpenAPI contract before the code, so the frontend can build against it the same day.</p>
+            <p data-reveal style="--d:60ms">Every feature ships with JUnit and Mockito tests, a SonarQube check and an 80% coverage target. Day to day that means Java, Spring Boot, Spring for GraphQL, Spring Security, RabbitMQ, Kubernetes and AWS.</p>
+            <p data-reveal style="--d:120ms">I studied Computer Science at the University of Colombo School of Computing and joined X-Venture as an intern in November 2024. Six months later I joined full time to build XAPI.</p>
+            <p data-reveal style="--d:180ms">When an idea is hard to explain in a meeting, I animate it. That is how GraphQL in Practice started.</p>
+          </div>
+          <p class="about__sign" data-reveal><span class="lead">Dhanushka Dilshan</span><span class="small muted">Backend software engineer, X-Venture</span></p>
+          <div class="about__actions" data-reveal>
+            <a class="btn" href={mailto}>Get in touch</a>
             <a class="link" href={cvHref}>Download CV</a>
           </div>
+        </section>
+      </div>
+
+      <div class="stage" aria-hidden="true">
+        {series.map((s) => (
+          <div class={'slide' + (s.n === firstEp ? ' is-on' : '')} data-slide={'ep' + s.n}>
+            <div class="media film"><video muted loop playsinline preload="none" poster={F + 'ep' + s.n + '.jpg'} width="720" height="720"><source src={F + 'ep' + s.n + '.mp4'} type="video/mp4" /></video></div>
+          </div>
+        ))}
+        <div class="slide slide--photo" data-slide="about">
+          <img class="media" src="/media/portrait-close.jpg" width="640" height="800" loading="lazy" alt="" />
         </div>
+        <div class="stage__bar small"><span class="stage__cap" data-cap>{epCaption(series[firstEp - 1])}</span><span class="muted">GraphQL in Practice</span></div>
+      </div>
+    </div>
+
+    <!-- CONTACT: one prompt, one field -->
+    <section class="contact" id="contact" aria-labelledby="contact-h">
+      <div class="contact__col">
+        <h2 class="contact__prompt" id="contact-h" data-reveal><span class="muted">Hiring a backend engineer?</span><br />Write me a line.</h2>
+        <form class="contact__form" action={'mailto:' + email} method="get" data-mail={email} data-reveal style="--d:80ms">
+          <input type="hidden" name="subject" value="Hello, from your portfolio" />
+          <label class="sr-only" for="msg">Your message</label>
+          <input class="contact__field" id="msg" name="body" type="text" autocomplete="off" placeholder="We're hiring a backend engineer for..." aria-describedby="msg-note" />
+          <button class="contact__send" type="submit" aria-label="Send by email">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" /></svg>
+          </button>
+        </form>
+        <p class="small muted contact__note" id="msg-note" data-reveal style="--d:120ms">It opens your email app with this line, addressed to me.</p>
+        <dl class="contact__rows small" data-reveal style="--d:160ms">
+          <div><dt class="muted">Email</dt><dd><a class="link" href={mailto}>{email}</a></dd></div>
+          <div><dt class="muted">LinkedIn</dt><dd><a class="link" href={linkedin}>linkedin.com/in/dhanushkacc</a></dd></div>
+          <div><dt class="muted">GitHub</dt><dd><a class="link" href={github}>github.com/dhanushkacc</a></dd></div>
+          <div><dt class="muted">Based in</dt><dd>Colombo, Sri Lanka</dd></div>
+        </dl>
       </div>
     </section>
-
-    <!-- 6. CONTACT: inverted field -->
-    <section class="contact" id="contact">
-      <p class="contact__ask reveal">Hiring for a backend or GraphQL role? Write to me.</p>
-      <a class="contact__email" href={mailtoPlain} aria-label={`Email ${email}`}>
-        <span class="contact__email-line">{emailUser}@</span>
-        <span class="contact__email-line">{emailHost}</span>
-      </a>
-      <p class="contact__city">Colombo, Sri Lanka</p>
-      <nav class="contact__links">
-        <a class="link" href={linkedin}>LinkedIn</a>
-        <a class="link" href={github}>GitHub</a>
-        <a class="link" href={cvHref}>Download CV</a>
-      </nav>
-    </section>
-
   </main>
 
-  <!-- 7. FOOTER -->
+  <!-- FOOTER: the last frame of the series on one half, the menu on the other -->
   <footer class="footer">
-    <img class="footer__photo" src="/media/colombo-archival.jpg" width="2400" height="1869" loading="lazy" alt="Hoek York Street and Chatham Street, Colombo, an archival photograph of the city" />
-    <div class="footer__scrim footer__scrim--top"></div>
-    <div class="footer__scrim footer__scrim--bottom"></div>
-    <nav class="footer__links">
-      <a class="link" href="#work">Work</a>
-      <a class="link" href="#writing">Writing</a>
-      <a class="link" href="#about">About</a>
-      <a class="link" href="#contact">Contact</a>
-    </nav>
-    <div class="footer__contact">
-      <a class="link" href={mailtoPlain}>{email}</a>
-      <a class="link" href={linkedin}>linkedin.com/in/dhanushkacc</a>
-      <a class="link" href={github}>github.com/dhanushkacc</a>
+    <div class="footer__film">
+      <video muted loop playsinline preload="none" poster={F + 'ep8-map.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep8-map.mp4'} type="video/mp4" /></video>
     </div>
-    <h2 class="footer__mark">DHANUSHKA DILSHAN</h2>
-    <p class="credits footer__credit">
-      © 2026 Dhanushka Dilshan. Picture: <a href="https://commons.wikimedia.org/w/index.php?curid=85210909">“Hoek York Street en Chatham Street, Colombo”</a>, Rijksmuseum, CC0, via Wikimedia Commons.
-    </p>
+    <div class="footer__menu">
+      <p class="footer__mark small">Dhanushka Dilshan</p>
+      <ul class="footer__links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#films">Films</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href={cvHref}>CV</a></li>
+      </ul>
+      <div class="footer__blocks small">
+        <p><a class="link" href={mailto}>{email}</a><br />Colombo, Sri Lanka</p>
+        <p><a class="link" href={linkedin}>LinkedIn</a><br /><a class="link" href={github}>GitHub</a></p>
+      </div>
+      <p class="footer__legal small muted">© 2026 Dhanushka Dilshan. The films and photographs are my own.</p>
+    </div>
   </footer>
 
-  <script src="/scripts/reveal.js" type="module"></script>
-  <script src="/scripts/query-demo.js" type="module"></script>
-  <script src="/scripts/graph.js" type="module"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js" integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js" integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF" crossorigin="anonymous"></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
+  <script is:inline src="/scenes/stage.js"></script>
+  <script is:inline src="/scripts/site.js"></script>
+  <script is:inline src="/scripts/query-demo.js" type="module"></script>
 
-  <style>
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  <style is:global>
+    /* ---------- the split ---------- */
+    .split { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
+    .read { padding: 0 var(--pad); min-width: 0; }
+    .stage { position: sticky; top: 0; height: 100svh; background: var(--stage); overflow: clip; }
+    .m-only { display: none; }
 
-    /* Nav */
-    .nav {
-      position: absolute; top: 0; left: 0; right: 0; z-index: 5;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: var(--margin);
-      font-size: var(--step-small);
+    .slide { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); z-index: 0; }
+    .slide.is-on { clip-path: inset(0); z-index: 2; }
+    .slide.was-on { clip-path: inset(0); z-index: 1; }
+    .slide--photo .media { position: absolute; inset: 0 0 56px 0; width: 100%; height: calc(100% - 56px); object-fit: cover; object-position: 50% 22%; }
+    .film { position: absolute; inset: clamp(24px, 4vw, 64px) clamp(24px, 4vw, 64px) calc(56px + clamp(24px, 4vw, 64px)); }
+    .film video { width: 100%; height: 100%; object-fit: contain; background: var(--stage); }
+    .stage__bar {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 56px; z-index: 3;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 0 var(--pad); background: var(--bg);
     }
-    .nav__links { display: flex; gap: clamp(16px, 2vw, 32px); }
+    .stage__cap { display: inline-block; }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .slide.is-on { transition: clip-path 900ms var(--ease-in-out); }
+      .js .slide.is-on .media { animation: slide-settle 1500ms var(--ease-soft); }
+      .js .stage__cap.is-new { animation: cap-in 600ms var(--ease-expo); }
+    }
+    @keyframes cap-in { from { opacity: 0; transform: translateY(10px); } }
+    @keyframes slide-settle { from { transform: scale(1.06); } }
 
-    /* 1. HERO */
-    .hero {
-      position: relative;
-      min-height: 100svh;
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto 1fr auto;
-      background: var(--bg);
-      overflow: hidden;
-      padding: 0 var(--margin);
+    /* ---------- hero ---------- */
+    .hero { min-height: 100svh; display: flex; flex-direction: column; }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: clamp(20px, 2.4vw, 32px) 0; }
+    .nav__links { display: flex; gap: clamp(16px, 2vw, 28px); }
+    .hero__body { margin-top: auto; padding-bottom: clamp(56px, 12svh, 140px); }
+    .hero__sentence { max-width: 30ch; margin-top: 40px; }
+    .hero__actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .split:first-child .stage { animation: stage-open 1100ms var(--ease-in-out) 120ms both; }
+      .js .split:first-child .slide--photo.is-on .media { animation: settle 1400ms var(--ease-expo) 80ms both; }
     }
-    .hero__portrait {
-      position: absolute; right: clamp(0px, 4vw, 64px); bottom: 0;
-      height: 92svh; width: auto; object-fit: contain; object-position: bottom;
-      filter: grayscale(0.25) brightness(0.92) contrast(1.05);
-      z-index: 0;
-    }
-    .hero__name {
-      grid-row: 1 / 4; grid-column: 1;
-      position: relative; z-index: 1; pointer-events: none;
-      display: grid; grid-template-rows: auto 1fr auto;
-      width: 100%; height: 100%;
-    }
-    .hero__line {
-      position: relative; z-index: 2; pointer-events: auto;
-      font-size: var(--step-display);
-      line-height: 0.85;
-      letter-spacing: -0.02em;
-      font-weight: 100;
-      mix-blend-mode: difference;
-    }
-    .hero__line--1 { grid-row: 1; justify-self: start; padding-top: 72px; }
-    .hero__line--2 { grid-row: 3; justify-self: end; text-align: right; padding-bottom: 24px; }
-    .hero__mid {
-      grid-row: 2; grid-column: 1; z-index: 1; align-self: center;
-      max-width: 48ch;
-      display: flex; flex-direction: column; gap: 28px;
-    }
-    .hero__sentence { font-size: var(--step-lead); color: var(--ink); max-width: 38ch; }
-    .hero__cta { width: fit-content; }
-    @media (max-width: 860px) {
-      .hero { padding: 0 16px; }
-      .hero__line { font-size: 15vw; }
-      .hero__line--1 { padding-top: 88px; }
-      .hero__portrait { height: 54svh; opacity: 0.9; }
-      .hero__mid { grid-row: 2; align-self: start; margin-top: 40svh; max-width: 90vw; }
-      .hero__sentence { max-width: 32ch; }
-    }
+    @keyframes stage-open { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+    @keyframes settle { from { transform: scale(1.1); } to { transform: none; } }
 
-    /* 2. INTRO */
-    .intro {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr clamp(220px, 22vw, 320px);
-      align-items: start;
-      gap: clamp(24px, 4vw, 64px);
-      padding: var(--gap-section) var(--margin) clamp(48px,6vw,88px);
-      background: var(--bg);
-    }
-    .intro__head {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: clamp(2.5rem, 1.4rem + 5vw, 5.5rem);
-      font-weight: 600;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      margin: 0 0 24px;
-      max-width: 14ch;
-    }
-    .intro__accent { color: var(--accent); }
-    .intro__sub { font-size: var(--step-lead); color: var(--muted); max-width: 32ch; }
-    .intro__photos { display: flex; flex-direction: column; gap: 16px; }
-    .intro__photos img, .intro__photos video { aspect-ratio: 3/2; object-fit: cover; object-position: top; width: 100%; }
-    .intro__note { font-size: var(--step-small); color: var(--muted); }
-    @media (max-width: 760px) {
-      .intro { grid-template-columns: 1fr; padding: clamp(72px,16vw,120px) 16px; }
-      .intro__head { font-size: 10.5vw; }
-      .intro__photos { flex-direction: row; flex-wrap: wrap; }
-      .intro__note { width: 100%; }
-    }
+    /* ---------- reading sections ---------- */
+    .sec { padding-top: var(--gap-section); }
+    .sec > .head { max-width: 16ch; }
+    .intro__text { max-width: 44ch; margin-top: 40px; display: grid; gap: 1.1em; }
+        .intro__text .intro__first { color: var(--ink); font-weight: 500; font-size: var(--step-lead); line-height: 1.35; letter-spacing: -0.015em; }
 
-    /* 3. WORK — one lineage graph: a hub node and four spokes, connected by lines,
-       each a real button that opens its write-up in the shared panel below. */
-    .work { background: var(--bg); padding: var(--gap-section) 0 0; }
-    .work__head { padding: 0 var(--margin); margin-bottom: clamp(48px, 7vw, 96px); }
-    .graph { position: relative; padding: 0 var(--margin); }
-    .graph__lines { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .graph__line { stroke: var(--surface-2); stroke-width: 1.5; transition: stroke 0.3s var(--ease-out); }
-    .graph__line.is-active { stroke: var(--accent); }
-    .node {
-      display: block; width: 100%; text-align: left;
-      background: none; border: 0; padding: 0; color: inherit; cursor: pointer;
-      font: inherit;
+    .index { margin-top: 40px; max-width: 46ch; }
+    .index__row {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 16px; min-height: 48px; padding: 10px 0;
+      text-decoration: none; color: var(--muted); transition: color var(--t-hover) ease, transform var(--t-ui) var(--ease-out);
     }
-    .node__name {
-      display: block; margin-top: 14px;
-      font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.01em;
-    }
-    .node__relation { display: block; margin-top: 4px; font-size: var(--step-small); color: var(--muted); }
-    .node img {
-      display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top;
-      background: var(--surface); filter: brightness(0.85) saturate(0.95);
-      outline: 1.5px solid var(--surface-2); outline-offset: -1.5px;
-      transition: outline-color 0.3s var(--ease-out), filter 0.3s var(--ease-out);
-    }
-    .node:hover img, .node.is-active img { outline-color: var(--accent); filter: brightness(1) saturate(1); }
-    .node--hub {
-      position: relative; z-index: 1; width: 100%;
-      display: grid; grid-template-columns: minmax(260px, 1fr) 1.3fr;
-      gap: clamp(32px, 4.5vw, 64px); align-items: center;
-    }
-    .node--hub__text { display: flex; flex-direction: column; gap: 14px; }
-    .node--hub .node__name { font-size: var(--step-head); }
-    .node__intro { font-size: var(--step-lead); color: var(--muted); max-width: 32ch; }
-    .graph__spokes {
-      position: relative; z-index: 1; margin-top: clamp(72px, 11vw, 160px);
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(16px, 2.4vw, 32px);
-    }
-    .detail {
-      margin-top: clamp(56px, 8vw, 100px); padding: clamp(32px, 4.5vw, 56px) var(--margin) clamp(48px,6vw,88px);
-      background: var(--surface);
-    }
-    .detail__panel {
-      display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 4.5vw, 64px); align-items: center;
-    }
-    .detail__panel[hidden] { display: none; }
-    .detail__copy { max-width: 60ch; }
-    .detail__title { font-size: clamp(32px, 4.5vw, 56px); font-weight: 300; letter-spacing: -0.02em; margin-bottom: 10px; }
-    .detail__line { font-size: var(--step-small); color: var(--muted); margin-bottom: 18px; }
-    .detail__text { font-size: var(--step-body); color: var(--ink); }
-    .detail__image {
-      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: left top;
-      background: var(--bg); outline: 1.5px solid var(--surface-2); outline-offset: -1.5px;
-    }
-    @media (max-width: 760px) {
-      .graph__lines { display: none; }
-      .node--hub { grid-template-columns: 1fr; text-align: left; }
-      .graph__spokes { grid-template-columns: 1fr 1fr; margin-top: 32px; }
-      .detail { padding: 28px 16px; }
-      .detail__panel { grid-template-columns: 1fr; }
-      .detail__image { order: -1; }
-    }
+    .index__name { font-size: var(--step-lead); letter-spacing: -0.015em; }
+    .index__row.is-current { color: var(--ink); }
+    .index__row.is-current .index__tags { color: var(--accent); }
+    @media (hover: hover) and (pointer: fine) { .index__row:hover { color: var(--ink); transform: translateX(8px); } }
 
-    /* 4. WRITING */
-    .writing { padding: var(--gap-section) var(--margin) clamp(48px,6vw,88px); background: var(--bg); }
-    .demo {
-      background: var(--surface);
-      padding: clamp(24px, 4vw, 48px);
-      margin-bottom: clamp(64px, 8vw, 120px);
+    .project { min-height: 92svh; display: flex; flex-direction: column; justify-content: center; max-width: 46ch; padding: 48px 0; }
+    .project__name { font-size: var(--step-head); font-weight: 600; line-height: 1; letter-spacing: -0.035em; }
+    .project__meta { margin-top: 16px; }
+    .project__text { margin-top: 24px; }
+
+    /* ---------- scene: the opening window ---------- */
+    .series { background: var(--stage); }
+    .series__stage { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: clamp(28px, 5svh, 56px); padding: clamp(56px, 9svh, 104px) var(--margin); }
+    .series__cards { position: relative; --cols: 4; --rows: 2; --gap: clamp(8px, 1vw, 16px); display: grid; grid-template-columns: repeat(var(--cols), 1fr); gap: var(--gap); width: min(100%, calc((100svh - 330px) * var(--cols) / var(--rows))); }
+    .series__card img { width: 100%; height: auto; aspect-ratio: 1; }
+    .series__text { text-align: center; max-width: 40ch; }
+    .series__lead { margin-top: 18px; color: var(--muted); }
+    html.js .series.is-live .series__stage { padding-block: clamp(32px, 5svh, 64px); }
+
+    /* ---------- films list ---------- */
+    .films__sub { margin-top: 20px; max-width: 44ch; }
+    .eps { margin-top: 36px; max-width: 46ch; }
+    .ep {
+      width: 100%; display: grid; grid-template-columns: 16px 1fr auto; align-items: baseline; gap: 14px;
+      min-height: 56px; padding: 12px 0; background: none; border: 0; text-align: left; cursor: pointer;
+      transition: transform var(--t-ui) var(--ease-out);
     }
-    .demo__head { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: var(--step-lead); margin-bottom: 8px; }
-    .demo__sub { color: var(--muted); max-width: 60ch; margin-bottom: 28px; }
-    .demo__body { display: grid; grid-template-columns: 180px 1fr; gap: clamp(20px,3vw,40px); }
-    .demo__fields { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
-    .demo__fields label { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-    .demo__fields input { accent-color: var(--accent); width: 18px; height: 18px; }
-    .demo__panes { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ep__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--surface); align-self: center; transition: background-color var(--t-hover) ease, transform var(--t-ui) var(--ease-out); }
+    .ep__title { display: flex; flex-direction: column; gap: 2px; font-size: var(--step-body); font-weight: 500; }
+    .ep__date { font-variant-numeric: tabular-nums; }
+    .ep[aria-pressed="true"] .ep__dot { background: var(--accent); transform: scale(1.3); }
+    .ep[aria-pressed="true"] .ep__title { color: var(--ink); }
+    .ep[aria-pressed="false"] .ep__title { color: color-mix(in srgb, var(--ink) 82%, var(--bg)); }
+    @media (hover: hover) and (pointer: fine) { .ep:hover { transform: translateX(8px); } .ep:hover .ep__dot { background: var(--muted); } .ep[aria-pressed="true"]:hover .ep__dot { background: var(--accent); } }
+    .ep:active { transform: scale(0.99); }
+
+    /* ---------- demo ---------- */
+    .demo__sub { margin-top: 20px; max-width: 44ch; }
+    .demo__body { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 46rem; }
+    .demo__fields { grid-column: 1 / -1; border: 0; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .demo__fields label { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; background: var(--surface); cursor: pointer; transition: background-color var(--t-hover) ease; }
+    .demo__fields label:has(input:checked) { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); }
+    .demo__fields input { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; }
     .demo__pane {
-      margin: 0; padding: 20px; background: var(--bg); color: var(--muted);
-      /* taste-skill-ignore: real code (a GraphQL query/response), set in <pre><code> */
-      font-family: ui-monospace, 'SFMono-Regular', monospace; font-size: 15px; line-height: 1.6;
-      overflow: auto; white-space: pre-wrap; word-break: break-word;
+      margin: 0; padding: 20px; min-height: 180px; background: var(--surface); color: var(--muted); overflow-x: auto;
+      /* taste-skill-ignore: real code (a GraphQL query and its response), set in <pre><code> */
+      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 14px; line-height: 1.6;
     }
-    .demo__pane--accent { color: var(--accent); }
-    @media (max-width: 760px) {
+    .demo__pane--out { color: var(--accent); }
+
+    /* ---------- about ---------- */
+    .about__face { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; margin-bottom: 28px; }
+    .about__letter { margin-top: 36px; max-width: 46ch; display: grid; gap: 1.1em; }
+    .about__sign { margin-top: 36px; display: flex; flex-direction: column; gap: 4px; }
+    .about__actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; padding-bottom: var(--gap-section); }
+
+    /* ---------- contact ---------- */
+    .contact { background: var(--stage); padding: clamp(120px, 18svh, 200px) var(--margin) clamp(120px, 16svh, 160px); display: flex; justify-content: center; }
+    .contact__col { width: min(560px, 100%); }
+    .contact__prompt { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: 500; line-height: 1.25; letter-spacing: -0.02em; }
+    .contact__form { position: relative; margin-top: 28px; }
+    .contact__field {
+      width: 100%; height: 64px; padding: 0 72px 0 22px; border: 0; border-radius: 0;
+      background: #1d2740; color: var(--ink); font-size: var(--step-body);
+    }
+    .contact__field::placeholder { color: #9aa6ba; }
+    .contact__field:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .contact__send {
+      position: absolute; right: 10px; top: 10px; width: 44px; height: 44px; border-radius: 50%; border: 0;
+      background: var(--accent); color: var(--accent-ink); display: grid; place-items: center; cursor: pointer;
+      transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
+    }
+    .contact__send:active { transform: scale(0.94); }
+    @media (hover: hover) and (pointer: fine) { .contact__send:hover { background: var(--accent-strong); } .contact__send:hover svg { transform: translateX(2px); } }
+    .contact__send svg { transition: transform var(--t-ui) var(--ease-out); }
+    .contact__note { margin-top: 16px; }
+    .contact__rows { margin: 72px 0 0; display: grid; gap: 14px; }
+    .contact__rows div { display: grid; grid-template-columns: 96px 1fr; gap: 16px; }
+    .contact__rows dd { margin: 0; overflow-wrap: anywhere; }
+
+    /* ---------- footer ---------- */
+    .footer { display: grid; grid-template-columns: 1fr 1fr; min-height: 100svh; }
+    .footer__film { background: var(--stage); display: flex; align-items: center; justify-content: center; padding: clamp(24px, 4vw, 64px); overflow: clip; }
+    .footer__film video { width: 100%; max-height: 100%; aspect-ratio: 1; object-fit: contain; }
+    .footer__menu { background: var(--surface); display: flex; flex-direction: column; padding: clamp(32px, 5vw, 80px) var(--pad); }
+    .footer__mark { color: var(--muted); }
+    .footer__links { margin-top: clamp(32px, 6svh, 64px); display: grid; gap: clamp(8px, 1.4svh, 16px); }
+    .footer__links a { display: inline-block; font-size: var(--step-head); font-weight: 600; letter-spacing: -0.035em; line-height: 1.05; text-decoration: none; transition: transform var(--t-ui) var(--ease-out), color var(--t-hover) ease; }
+    @media (hover: hover) and (pointer: fine) {
+      .footer__links:hover a { color: var(--muted); }
+      .footer__links a:hover { color: var(--ink); transform: translateX(12px); }
+    }
+    .footer__blocks { margin-top: 64px; display: flex; gap: 48px; flex-wrap: wrap; }
+    .footer__legal { margin-top: auto; padding-top: 48px; }
+
+    /* ---------- phone and narrow tablet: a composition of its own ---------- */
+    @media (max-width: 1023px) {
+      .split { display: block; }
+      .stage { display: none; }
+      .m-only { display: block; }
+      .read { padding: 0 20px; }
+      .nav { padding: 18px 0; }
+      .nav__cv { display: none; }
+      .hero { min-height: 0; display: block; }
+      .hero__photo { position: sticky; top: 0; z-index: 0; height: 46svh; margin: 0 -20px; background: var(--stage); }
+      .hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+      .hero__body { position: relative; z-index: 1; background: var(--bg); margin: -28px -20px 0; padding: 28px 20px 0; }
+      .hero .display { font-size: clamp(3.4rem, 15vw, 6rem); }
+      .hero__sentence { margin-top: 28px; }
+      .hero__actions { margin-top: 28px; }
+      .sec { padding-top: clamp(80px, 14vw, 112px); }
+      .m-film { margin: 28px -20px 0; background: var(--stage); padding: 0 20px; }
+      .m-film video { width: 100%; max-width: 560px; aspect-ratio: 1; height: auto; margin: 0 auto; background: var(--stage); }
+      .project { min-height: 0; padding: clamp(72px, 12vw, 96px) 0 0; }
+      .project .m-film { margin-top: 0; margin-bottom: 28px; }
+      .index { margin-top: 28px; }
       .demo__body { grid-template-columns: 1fr; }
-      .demo__panes { grid-template-columns: 1fr; }
+      .about__actions { padding-bottom: clamp(80px, 14vw, 112px); }
+      .contact { padding: 96px 20px 112px; }
+      .contact__rows { margin-top: 56px; }
+      .contact__rows div { grid-template-columns: 1fr; gap: 2px; }
+      .footer { grid-template-columns: 1fr; min-height: 0; }
+      .footer__film { padding: 20px; }
+      .footer__film video { max-width: 560px; }
+      .footer__menu { padding: 40px 20px 32px; }
+      .footer__links a { font-size: clamp(2rem, 9vw, 3rem); }
+      .footer__blocks { margin-top: 40px; gap: 24px; flex-direction: column; }
     }
-
-    .table__group-head { color: var(--accent); font-size: var(--step-small); font-weight: 600; margin: 48px 0 12px; }
-    .table__group:first-child .table__group-head { margin-top: 0; }
-    .table__row {
-      display: grid; grid-template-columns: 2fr 1.2fr 2.4fr auto;
-      gap: 16px; padding: 18px 24px;
-      font-size: clamp(16px, 1.6vw, 20px);
+    @media (min-width: 700px) and (max-width: 1023px) {
+      .project { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; align-content: center; max-width: none; }
+      .project .m-film { grid-column: 1; grid-row: 1 / span 3; margin: 0; padding: 0; align-self: center; }
+      .project > :not(.m-film) { grid-column: 2; }
+      .project__name { align-self: end; }
+      .intro { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+      .intro > .head { grid-column: 1 / -1; }
+      .intro .m-film { margin: 40px 0 0; padding: 0; align-self: start; }
+      .intro__text { margin-top: 40px; }
+      .films { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+      .films > .head, .films > .films__sub { grid-column: 1 / -1; }
+      .films .m-film { margin: 36px 0 0; padding: 0; align-self: start; position: sticky; top: 24px; }
+      .films .eps { margin-top: 36px; }
     }
-    .table__row:nth-child(even) { background: var(--surface); }
-    .table__date { font-variant-numeric: tabular-nums; color: var(--muted); text-align: right; }
-    .table__format, .table__topic { color: var(--muted); }
-    @media (max-width: 700px) {
-      .table__row { grid-template-columns: 1fr auto; row-gap: 2px; font-size: 16px; }
-      .table__format, .table__topic { grid-column: 1 / -1; font-size: 14px; }
+    @media (max-width: 699px) {
+      .films .m-film { position: sticky; top: 0; z-index: 2; padding-block: 12px; }
+      .films .m-film video { max-height: 38svh; width: auto; }
     }
-
-    /* 5. ABOUT */
-    .about { padding: var(--gap-section) var(--margin) clamp(48px,6vw,88px); background: var(--bg); }
-    .about__panel {
-      position: relative;
-      background: var(--surface);
-      min-height: 100svh;
-      padding: 56px clamp(20px, 4vw, 56px);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: auto 1fr;
-      gap: 24px 48px;
+    @media (max-width: 599px) {
+      .hero__actions .btn, .about__actions .btn { flex: 1; }
     }
-    .about__statement { grid-column: 1 / 2; font-size: clamp(40px, 4.4vw, 64px); line-height: 1.05; color: var(--ink); }
-    .about__portrait {
-      grid-column: 1 / 2; grid-row: 2 / 3; align-self: end;
-      width: min(38vw, 440px);
-      clip-path: polygon(14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%, 0 14%);
-      filter: brightness(0.9);
-    }
-    .about__col { grid-column: 2 / 3; max-width: 420px; display: flex; flex-direction: column; gap: 14px; align-self: start; }
-    .about__col:nth-of-type(3) { grid-row: 2 / 3; align-self: end; padding-bottom: 8px; }
-    .about__sub { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; font-size: var(--step-lead); }
-    .about__p { color: var(--ink); }
-    .about__actions { display: flex; align-items: center; gap: 24px; margin-top: 8px; }
-    @media (max-width: 860px) {
-      .about__panel { grid-template-columns: 1fr; grid-template-rows: auto auto auto auto; padding: 32px 16px; }
-      .about__statement, .about__portrait, .about__col, .about__col:nth-of-type(3) { grid-column: 1; grid-row: auto; }
-      .about__portrait { width: 72vw; margin: 0 auto; }
-      .about__statement { font-size: 8.5vw; }
-    }
-
-    /* 6. CONTACT */
-    .contact {
-      min-height: 100svh;
-      background: var(--field-1); color: var(--field-1-ink);
-      position: relative;
-      display: flex; flex-direction: column; justify-content: center; gap: clamp(32px, 6vh, 64px);
-      padding: var(--margin) var(--margin) clamp(120px, 16vh, 180px);
-    }
-    .contact__ask { max-width: 24ch; font-size: var(--step-lead); }
-    .contact__email {
-      font-family: 'Zodiak', serif; font-weight: 100;
-      font-size: clamp(28px, 6.5vw, 96px);
-      line-height: 1.04;
-      letter-spacing: -0.01em;
-      color: var(--field-1-ink);
-      text-decoration: none;
-      align-self: flex-start;
-      max-width: 100%;
-      transition: color 220ms var(--ease-out);
-    }
-    .contact__email-line { display: block; overflow-wrap: anywhere; }
-    .contact__email:hover, .contact__email:focus-visible { color: var(--accent-ink); background: var(--accent); }
-    .contact__city { position: absolute; left: var(--margin); bottom: var(--margin); font-size: var(--step-small); }
-    .contact__links { position: absolute; right: var(--margin); bottom: var(--margin); display: flex; gap: 20px; font-size: var(--step-small); }
-    .contact .link { color: var(--field-1-ink); text-decoration-color: #0b132780; }
-    @media (max-width: 760px) {
-      .contact__email { font-size: 8vw; }
-      .contact__city, .contact__links { position: static; margin-top: 24px; }
-      .contact { padding: 16px; }
-    }
-
-    /* 7. FOOTER */
-    .footer {
-      position: relative;
-      min-height: 100svh;
-      overflow: hidden;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: var(--margin);
-    }
-    .footer__photo {
-      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6);
-      animation: footer-drift 24s ease-in-out infinite alternate;
-    }
-    @keyframes footer-drift {
-      from { transform: scale(1); }
-      to { transform: scale(1.06); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .footer__photo { animation: none; }
-    }
-    /* Two flat bands instead of a gradient, so the top and bottom text stay legible and the middle of the photograph stays clear. */
-    .footer__scrim { position: absolute; left: 0; right: 0; background: rgba(11,19,39,0.6); }
-    .footer__scrim--top { top: 0; height: 22%; }
-    .footer__scrim--bottom { bottom: 0; height: 34%; }
-    .footer__links, .footer__contact { position: relative; z-index: 1; display: flex; gap: 20px; font-size: var(--step-small); flex-wrap: wrap; }
-    .footer__contact { justify-content: flex-end; }
-    .footer__mark {
-      position: relative; z-index: 1;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-weight: 600;
-      font-size: clamp(32px, 11vw, 140px);
-      line-height: 1;
-      color: var(--ink);
-      align-self: end;
-    }
-    .footer__credit { position: relative; z-index: 1; grid-row: 3; }
-    @media (max-width: 760px) {
-      .footer { padding: 16px; min-height: 88svh; }
-      .footer__links, .footer__contact { flex-direction: column; gap: 6px; }
+    @media (max-width: 767px) {
+      .series__stage { padding: 72px 20px; }
+      .series__cards { --cols: 2; --rows: 4; width: min(100%, calc((100svh - 300px) * var(--cols) / var(--rows)), 360px); }
+      .series__lead { font-size: var(--step-body); }
     }
   </style>
 </body>

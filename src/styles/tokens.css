@@ -1,97 +1,96 @@
-/* Design tokens for "the dark room" direction, with the proportions the skill dealt
-   (one ground, one ink, one accent) but the colours taken from the GraphQL in Practice
-   video series, so the site and the series read as one brand. */
+/* Split stage, Switzer, "Night" palette. The accent is the teal of the GraphQL in Practice films,
+   so the page and the films on its stage read as one thing. --stage is the films' own ground,
+   so a square film sits on it with no visible edge and is never cropped. */
 :root {
-  --bg: #0b1327;
-  --surface: #121c36;
-  --surface-2: #17213f;
-  --ink: #eef1f5;
-  --muted: #93a1b8;
+  --bg: #0a0d14;
+  --surface: #131824;
+  --ink: #e9edf3;
+  --muted: #8f98a8;
   --accent: #2dd4bf;
-  --accent-ink: #06201c;
-  --field-1: #eef1f5;
-  --field-1-ink: #0b1327;
+  --accent-strong: #5eead4;
+  --accent-ink: #0a0d14;
+  --stage: #0a1b3a;
 
-  --radius: 0; /* square corners, as the direction's house rules default to */
-  --margin: clamp(20px, 4vw, 48px);
-  --gap-section: clamp(96px, 14vw, 220px);
+  --margin: clamp(1rem, 2.2vw, 2rem);
+  --pad: clamp(1.5rem, 4vw, 4.5rem);
+  --gap-section: clamp(7.5rem, 12vw, 13rem);
 
-  /* Five type steps. Everything on the page maps onto one of these. */
-  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.9375rem);
-  --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
-  --step-lead: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
-  --step-head: clamp(2.25rem, 1.3rem + 4.2vw, 4.5rem);
-  --step-display: clamp(3.5rem, 0.8rem + 11vw, 11rem);
+  --font: 'Switzer', ui-sans-serif, system-ui, sans-serif;
 
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+  --step-display: clamp(3.25rem, 1rem + 5.4vw, 6.5rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --t-press: 140ms;
+  --t-hover: 180ms;
+  --t-ui: 240ms;
+  --t-reveal: 800ms;
+  --t-open: 1100ms;
 }
 
-* { box-sizing: border-box; }
-html { background: var(--bg); color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); color-scheme: dark; -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Hanken Grotesk', system-ui, sans-serif;
+  font-family: var(--font);
   font-size: var(--step-body);
-  line-height: 1.55;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
-h1, h2, h3 { font-family: 'Zodiak', Georgia, serif; font-weight: 300; margin: 0; }
-p { margin: 0; }
+img, video { display: block; max-width: 100%; }
+h1, h2, h3, p, ul, ol, figure { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
-img, video { max-width: 100%; display: block; }
+button, input { font: inherit; color: inherit; }
 ::selection { background: var(--accent); color: var(--accent-ink); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-.section-head {
-  font-family: 'Hanken Grotesk', sans-serif;
-  font-weight: 500;
-  font-size: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem);
-  margin: 0 0 clamp(40px, 6vw, 72px);
-}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.display { font-weight: 600; font-size: var(--step-display); line-height: 0.95; letter-spacing: -0.04em; }
+.head { font-weight: 600; font-size: var(--step-head); line-height: 1; letter-spacing: -0.035em; }
+.lead { font-size: var(--step-lead); line-height: 1.35; letter-spacing: -0.015em; }
+.small { font-size: var(--step-small); }
+.muted { color: var(--muted); }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.9em 1.6em;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-size: var(--step-small);
-  font-weight: 600;
-  text-decoration: none;
-  border: none;
-  cursor: pointer;
-  transition: transform 220ms var(--ease-out), background 220ms var(--ease-out);
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 52px; padding: 0 26px;
+  background: var(--accent); color: var(--accent-ink);
+  font-weight: 500; text-decoration: none; border: 0; border-radius: 0; cursor: pointer;
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease;
 }
-.btn:hover, .btn:focus-visible { background: #4fe3d1; transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
-
+.btn:active { transform: scale(0.97); }
 .link {
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-color: var(--muted);
-  transition: text-decoration-color 200ms var(--ease-out);
+  text-decoration: underline; text-underline-offset: 0.22em; text-decoration-thickness: 0.07em;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  transition: text-decoration-color var(--t-hover) ease, color var(--t-hover) ease;
 }
-.link:hover, .link:focus-visible { text-decoration-color: var(--accent); }
-
-.credits {
-  font-size: var(--step-small);
-  color: var(--muted);
-}
-.credits a { color: var(--muted); }
-
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: var(--accent-strong); }
+  .link:hover { text-decoration-color: currentColor; }
 }
 
-.reveal { opacity: 0; transform: translateY(28px); }
-.reveal.is-in {
-  opacity: 1; transform: none;
-  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+/* Masked lines: each line rises out of its own baseline. */
+.lines .line { display: block; overflow: hidden; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.lines [data-line] { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero [data-line] { transform: translateY(105%); animation: rise-line 900ms var(--ease-expo) forwards; animation-delay: calc(120ms + var(--i, 0) * 90ms); }
+  .js .hero [data-load] { opacity: 0; transform: translateY(14px); animation: rise 600ms var(--ease-out) forwards; animation-delay: var(--d, 400ms); }
+  .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 900ms var(--ease-expo); transition-delay: var(--d, 0ms); }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal.is-in { opacity: 1; transform: none; }
-}
+@keyframes rise-line { to { transform: none; } }
+@keyframes rise { to { opacity: 1; transform: none; } }
