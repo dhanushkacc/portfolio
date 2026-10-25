@@ -6,3 +6,5 @@ dist/
 .alt-about.txt
 assets/source/
 assets/photo/_*
+.playwright-cli/
+review-hero*.png
