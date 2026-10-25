@@ -101,10 +101,10 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
         </header>
 
         <!-- INTRO -->
-        <section class="sec intro" id="intro" data-stage="intro" data-caption="DataLoader: 101 queries become 2">
+        <section class="sec intro" id="intro" data-stage="intro" data-caption="What I build">
           <h2 class="head" data-reveal>What I build</h2>
           <figure class="m-film m-only" data-reveal>
-            <video muted loop playsinline preload="none" poster={F + 'ep5.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep5.mp4'} type="video/mp4" /></video>
+            <video muted loop playsinline preload="none" poster={F + 'build.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'build.mp4'} type="video/mp4" /></video>
           </figure>
           <div class="intro__text">
             <p class="intro__first" data-reveal>I build the APIs that show where an organization's data comes from, where it goes and which rules apply to it.</p>
@@ -140,7 +140,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
           <img class="media" src="/media/portrait-tech.jpg" width="1024" height="1536" alt="" />
         </div>
         <div class="slide" data-slide="intro">
-          <div class="media film"><video muted loop playsinline preload="none" poster={F + 'ep5.jpg'} width="720" height="720"><source src={F + 'ep5.mp4'} type="video/mp4" /></video></div>
+          <div class="media film"><video muted loop playsinline preload="none" poster={F + 'build.jpg'} width="720" height="720"><source src={F + 'build.mp4'} type="video/mp4" /></video></div>
         </div>
         {projects.map((p) => (
           <div class="slide" data-slide={p.id}>
@@ -295,7 +295,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     .stage { position: sticky; top: 0; height: 100svh; background: var(--stage); overflow: clip; }
     .m-only { display: none; }
 
-    .slide { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); z-index: 0; }
+    .slide { position: absolute; inset: 0; clip-path: inset(100% 0 0 0); z-index: 0; background: var(--stage); }
     .slide.is-on { clip-path: inset(0); z-index: 2; }
     .slide.was-on { clip-path: inset(0); z-index: 1; }
     .slide--photo .media { position: absolute; inset: 0 0 56px 0; width: 100%; height: calc(100% - 56px); object-fit: cover; object-position: 50% 22%; }
