@@ -252,11 +252,11 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     <!-- CONTACT: one prompt, one field -->
     <section class="contact" id="contact" aria-labelledby="contact-h">
       <div class="contact__col">
-        <h2 class="contact__prompt" id="contact-h" data-reveal><span class="muted">Hiring a backend engineer?</span><br />Write me a line.</h2>
+        <h2 class="contact__prompt" id="contact-h" data-reveal><span class="muted">Hiring a software engineer?</span><br />Write me a line.</h2>
         <form class="contact__form" action={'mailto:' + email} method="get" data-mail={email} data-reveal style="--d:80ms">
           <input type="hidden" name="subject" value="Hello, from your portfolio" />
           <label class="sr-only" for="msg">Your message</label>
-          <input class="contact__field" id="msg" name="body" type="text" autocomplete="off" placeholder="We're hiring a backend engineer for..." aria-describedby="msg-note" />
+          <input class="contact__field" id="msg" name="body" type="text" autocomplete="off" placeholder="We're hiring a software engineer for..." aria-describedby="msg-note" />
           <button class="contact__send" type="submit" aria-label="Send by email">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" /></svg>
           </button>
@@ -285,7 +285,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       </nav>
     </div>
     <div class="footer__bottom small">
-      <p class="muted">© 2026 Dhanushka Dilshan. The videos and photographs are my own.</p>
+      <p class="muted">© 2026 Dhanushka Dilshan. All rights reserved.</p>
       <p class="footer__social">
         <a class="link" href={mailto}>Email</a>
         <a class="link" href={linkedin}>LinkedIn</a>
