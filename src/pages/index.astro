@@ -108,9 +108,11 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
           </figure>
           <div class="intro__text">
             <p class="intro__first" data-reveal>I build the APIs that show where an organization's data comes from, where it goes and which rules apply to it.</p>
-            <p data-reveal style="--d:80ms">At X-Venture I work on XAPI, a platform for data, API and AI governance: catalogs, data models, lineage and access control.</p>
-            <p data-reveal style="--d:160ms">I write each API as a contract first and care about what a request costs: how many queries it makes, whether it hits the cache, how large it is allowed to get.</p>
-            <p data-reveal style="--d:240ms">When something is hard to explain, I make a short video about it. <a class="link" href="#graphql-series">Watch the GraphQL series</a></p>
+            <p data-reveal style="--d:80ms">At X-Venture that means XAPI, a platform for data, API and AI governance: catalogs, data models, lineage and access control.</p>
+            <p data-reveal style="--d:160ms">An API starts as a contract, not as code. I shape it in design discussions with the team, write it in OpenAPI first, with clean REST resources and predictable responses, so the frontend team can build against it the same day I do.</p>
+            <p data-reveal style="--d:240ms">Then I make it hold up under real use. Related data loads in batches instead of one query per row, and large payloads come back in pages instead of all at once, so the API stays fast as an organization's data grows.</p>
+            <p data-reveal style="--d:320ms">The code behind it stays clean: readable, consistent across services and reviewed before it merges, so the next engineer can change it safely.</p>
+            <p data-reveal style="--d:400ms">Every call is checked by Spring Security against role-based access control, the same way in every service. Nothing ships without JUnit and Mockito tests, a SonarQube check and an 80% coverage target, and once it's live, I stay with it in production, from the logs to the fix.</p>
           </div>
         </section>
 
