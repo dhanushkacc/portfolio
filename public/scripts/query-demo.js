@@ -4,7 +4,7 @@
 // because the full response is printed first and the checkboxes only trim it.
 const DATA = {
   name: '"Dhanushka Dilshan"',
-  role: '"Backend Software Engineer"',
+  role: '"Software Engineer"',
   stack: '["Java", "Spring Boot", "Spring for GraphQL", "Kubernetes", "AWS"]',
   projects: '["Business Lineage", "Data Governance Core", "XCLP Streaming"]',
   writing: '["GraphQL in Practice — 8 parts"]',
