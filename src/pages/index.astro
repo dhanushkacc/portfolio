@@ -47,6 +47,14 @@ const series = [
   { n: 7, title: 'Pagination', topic: 'One page at a time', date: 'Nov 3', length: '0:46' },
   { n: 8, title: 'Business Lineage', topic: 'Where it all came together', date: 'Nov 5', length: '0:51' },
 ];
+const skills = [
+  { group: 'Languages and frameworks', items: 'Java, Spring Boot, Spring for GraphQL, Spring Security, TypeScript, Angular' },
+  { group: 'APIs', items: 'REST, OpenAPI, GraphQL' },
+  { group: 'Data and messaging', items: 'MongoDB, RabbitMQ, Caffeine' },
+  { group: 'Platform', items: 'Kubernetes, Docker, AWS, Keycloak' },
+  { group: 'Quality', items: 'JUnit, Mockito, SonarQube, Postman, Git' },
+  { group: 'AI-assisted engineering', items: 'Claude Code, MCP servers, subagents' },
+];
 const firstEp = 4;
 const epCaption = (s) => `Part ${s.n}: ${s.title}`;
 ---
@@ -208,14 +216,18 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
           </div>
         </section>
 
-        <section class="sec about" id="about" data-stage="about" data-caption="Dhanushka Dilshan, Colombo" aria-labelledby="about-h">
-          <h2 class="head" id="about-h" data-reveal>Contract first,<br />then the code</h2>
-          <div class="about__letter">
-            <p data-reveal>I write each API as an OpenAPI contract before the code, so the frontend can build against it the same day.</p>
-            <p data-reveal style="--d:60ms">Every feature ships with JUnit and Mockito tests, a SonarQube check and an 80% coverage target. Day to day that means Java, Spring Boot, Spring for GraphQL, Spring Security, RabbitMQ, Kubernetes and AWS.</p>
-            <p data-reveal style="--d:120ms">I studied Computer Science at the University of Colombo School of Computing and joined X-Venture as an intern in November 2024. Six months later I joined full time to build XAPI.</p>
-            <p data-reveal style="--d:180ms">When an idea is hard to explain in a meeting, I animate it. That is how GraphQL in Practice started.</p>
-          </div>
+        <section class="sec about" id="about" data-stage="about" data-caption="What I work with" aria-labelledby="about-h">
+          <h2 class="head" id="about-h" data-reveal>From UCSC to XAPI</h2>
+          <p class="about__story" data-reveal style="--d:60ms">I studied Computer Science at the University of Colombo School of Computing and joined X-Venture as an intern in November 2024. Six months later I joined full time to build XAPI, and I've worked across it since: governance APIs, lineage, access control and the AI tooling around them.</p>
+          <h3 class="about__sub" data-reveal>What I work with</h3>
+          <figure class="m-film m-only" data-reveal>
+            <video muted loop playsinline preload="none" poster={F + 'stack.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'stack.mp4'} type="video/mp4" /></video>
+          </figure>
+          <dl class="skills">
+            {skills.map((k, i) => (
+              <div class="skill" data-reveal style={`--d:${i * 70}ms`}><dt>{k.group}</dt><dd>{k.items}</dd></div>
+            ))}
+          </dl>
           <p class="about__sign" data-reveal><span class="lead">Dhanushka Dilshan</span><span class="small muted">Software engineer, X-Venture</span></p>
           <div class="about__actions" data-reveal>
             <a class="btn" href={mailto}>Get in touch</a>
@@ -230,10 +242,10 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
             <div class="media film"><video muted loop playsinline preload="none" poster={F + 'ep' + s.n + '.jpg'} width="720" height="720"><source src={F + 'ep' + s.n + '.mp4'} type="video/mp4" /></video></div>
           </div>
         ))}
-        <div class="slide slide--photo" data-slide="about">
-          <img class="media" src="/media/portrait-close.jpg" width="640" height="800" loading="lazy" alt="" />
+        <div class="slide" data-slide="about">
+          <div class="media film"><video muted loop playsinline preload="none" poster={F + 'stack.jpg'} width="720" height="720"><source src={F + 'stack.mp4'} type="video/mp4" /></video></div>
         </div>
-        <div class="stage__bar small"><span class="stage__cap" data-cap>{epCaption(series[firstEp - 1])}</span><span class="muted">GraphQL in Practice</span></div>
+        <div class="stage__bar small"><span class="stage__cap" data-cap>{epCaption(series[firstEp - 1])}</span><span class="muted">Colombo, Sri Lanka</span></div>
       </div>
     </div>
 
@@ -393,7 +405,13 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     .demo__pane--out { color: var(--accent); }
 
     /* ---------- about ---------- */
-    .about__letter { margin-top: 36px; max-width: 46ch; display: grid; gap: 1.1em; }
+    .about__story { margin-top: 36px; max-width: 46ch; }
+    .about__sub { margin-top: 64px; font-size: var(--step-lead); font-weight: 600; letter-spacing: -0.015em; }
+    .skills { margin: 20px 0 0; max-width: 46rem; }
+    .skill { display: grid; grid-template-columns: minmax(10rem, 13rem) 1fr; gap: 6px 24px; align-items: baseline; padding: 16px 0; }
+    .skill dt { color: var(--muted); font-size: var(--step-small); }
+    .skill dd { margin: 0; color: var(--ink); transition: color var(--t-hover) ease, transform var(--t-ui) var(--ease-out); }
+    @media (hover: hover) and (pointer: fine) { .skill:hover dd { color: var(--accent); transform: translateX(6px); } }
     .about__sign { margin-top: 36px; display: flex; flex-direction: column; gap: 4px; }
     .about__actions { display: flex; align-items: center; gap: 28px; margin-top: 36px; padding-bottom: var(--gap-section); }
 
@@ -452,6 +470,8 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       .index { margin-top: 28px; }
       .demo__body { grid-template-columns: 1fr; }
       .about__actions { padding-bottom: clamp(80px, 14vw, 112px); }
+      .skill { grid-template-columns: 1fr; padding: 12px 0; }
+      .about .m-film { margin-top: 20px; }
       .contact { padding: 96px 20px 112px; }
       .contact__rows { margin-top: 56px; }
       .contact__rows div { grid-template-columns: 1fr; gap: 2px; }
