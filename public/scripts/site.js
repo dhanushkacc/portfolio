@@ -93,25 +93,49 @@
     if (document.hidden) document.querySelectorAll('video').forEach((v) => v.pause()); else resync();
   });
 
-  // Pick a part: it plays on the stage (or in the phone player) and the list remembers it.
+  // Pick an episode: it plays on the stage (or in the phone player) and the list remembers it.
+  // data-ep is the film's id (ep4, cache2): its slide on the stage and its file in /media/films.
   const films = document.querySelector('[data-films]');
   if (films) {
     const player = films.querySelector('[data-films-player]');
     const st = stages.find((s) => s.split.contains(films));
-    films.querySelectorAll('[data-ep]').forEach((btn) => btn.addEventListener('click', () => {
-      const n = btn.dataset.ep;
-      films.querySelectorAll('[data-ep]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
-      films.dataset.stage = 'ep' + n;
+    const pick = (btn) => {
+      const id = btn.dataset.ep;
+      btn.closest('[data-list]').querySelectorAll('[data-ep]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      films.dataset.stage = id;
       films.dataset.caption = btn.dataset.caption;
-      if (st) st.show('ep' + n, btn.dataset.caption);
+      if (st) st.show(id, btn.dataset.caption);
       if (player) {
-        player.poster = '/media/films/ep' + n + '.jpg';
-        player.querySelector('source').src = '/media/films/ep' + n + '.mp4';
+        player.poster = '/media/films/' + id + '.jpg';
+        player.querySelector('source').src = '/media/films/' + id + '.mp4';
         player.load();
         seen.add(player);
         syncInline();
       }
-    }));
+    };
+    films.querySelectorAll('[data-ep]').forEach((btn) => btn.addEventListener('click', () => pick(btn)));
+
+    // The series switch: show one series' list, and play the episode it last had (or its first).
+    const tabs = [...films.querySelectorAll('[data-tab]')];
+    const select = (tab) => {
+      const name = tab.dataset.tab;
+      films.dataset.series = name;
+      tabs.forEach((t) => { const on = t === tab; t.setAttribute('aria-selected', String(on)); t.tabIndex = on ? 0 : -1; });
+      films.querySelectorAll('[data-list]').forEach((l) => { l.hidden = l.dataset.list !== name; });
+      films.querySelectorAll('[data-list-sub]').forEach((p) => { p.hidden = p.dataset.listSub !== name; });
+      const list = films.querySelector('[data-list="' + name + '"]');
+      list.classList.add('is-in');
+      pick(list.querySelector('[aria-pressed="true"]') || list.querySelector('[data-ep]'));
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t));
+      t.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+        next.focus();
+        select(next);
+      });
+    });
   }
 
   // The one field: open the visitor's email with their line, properly encoded.

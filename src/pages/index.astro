@@ -38,15 +38,25 @@ const projects = [
 ];
 
 const series = [
-  { n: 1, title: 'Why GraphQL', topic: 'One screen, two ways', date: 'Oct 22', length: '0:30' },
-  { n: 2, title: 'The schema', topic: 'The contract', date: 'Oct 24', length: '0:39' },
-  { n: 3, title: 'Resolvers', topic: 'Field by field', date: 'Oct 26', length: '0:44' },
-  { n: 4, title: 'The N+1 problem', topic: 'Watch the database log', date: 'Oct 28', length: '0:42' },
-  { n: 5, title: 'DataLoader', topic: '101 queries become 2', date: 'Oct 30', length: '0:38' },
-  { n: 6, title: 'Securing GraphQL', topic: 'Depth and complexity limits', date: 'Nov 1', length: '0:44' },
-  { n: 7, title: 'Pagination', topic: 'One page at a time', date: 'Nov 3', length: '0:46' },
-  { n: 8, title: 'Business Lineage', topic: 'Where it all came together', date: 'Nov 5', length: '0:51' },
+  { n: 1, title: 'Why GraphQL', topic: 'One screen, two ways', date: 'Oct 22', length: '0:30', post: '7519042456450146304' },
+  { n: 2, title: 'The schema', topic: 'The contract', date: 'Oct 24', length: '0:39', post: '7519767191345532928' },
+  { n: 3, title: 'Resolvers', topic: 'Field by field', date: 'Oct 26', length: '0:44', post: '7520491995874635777' },
+  { n: 4, title: 'The N+1 problem', topic: 'Watch the database log', date: 'Oct 28', length: '0:42', post: '7521202004052860928' },
+  { n: 5, title: 'DataLoader', topic: '101 queries become 2', date: 'Oct 30', length: '0:38', post: '7521926698162892800' },
+  { n: 6, title: 'Securing GraphQL', topic: 'Depth and complexity limits', date: 'Nov 1', length: '0:44', post: '7522651319988432896' },
+  { n: 7, title: 'Pagination', topic: 'One page at a time', date: 'Nov 3', length: '0:46', post: '7523376243455668224' },
+  { n: 8, title: 'Business Lineage', topic: 'Where it all came together', date: 'Nov 5', length: '0:51', post: '7524100907945545728' },
 ];
+// Caching in Practice: add one row here (and its cacheN.mp4/.jpg loop and poster) each time an episode is posted.
+const cacheSeries = [
+  { n: 1, title: 'Why cache?', topic: 'Keep a copy close', date: 'Nov 10', length: '0:44', post: '7525909703445508096' },
+  { n: 2, title: 'When not to cache', topic: 'Fast and wrong', date: 'Nov 15', length: '0:42', post: '7527741211533529088' },
+  { n: 3, title: 'Cache-aside', topic: 'Check, load, store', date: 'Nov 18', length: '0:43', post: '7528636586905845760' },
+  { n: 4, title: 'Three ways to write', topic: 'Safe, fast, selective', date: 'Nov 19', length: '0:54', post: '7529018952472002560' },
+  { n: 5, title: 'Spring caching in 60 seconds', topic: 'Four annotations', date: 'Nov 20', length: '0:59', post: '7529534035077869568' },
+];
+const cachePlanned = 20;
+const postUrl = (id) => `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`;
 const skills = [
   { group: 'Languages and frameworks', items: 'Java, Spring Boot, Spring for GraphQL, Spring Security, TypeScript, Angular' },
   { group: 'APIs', items: 'REST, OpenAPI, GraphQL' },
@@ -57,6 +67,7 @@ const skills = [
 ];
 const firstEp = 4;
 const epCaption = (s) => `Part ${s.n}: ${s.title}`;
+const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
 ---
 <!doctype html>
 <html lang="en">
@@ -64,14 +75,14 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dhanushka Dilshan, software engineer</title>
-  <meta name="description" content="Software engineer in Colombo building XAPI's data governance APIs and Business Lineage with Java, Spring Boot and GraphQL." />
+  <meta name="description" content="Software engineer in Colombo building XAPI's data governance APIs and Business Lineage with Java, Spring Boot and GraphQL, and making the GraphQL in Practice and Caching in Practice video series." />
   <meta name="theme-color" content="#0a0d14" />
   <link rel="canonical" href="https://dhanushka-dilshan.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dhanushka Dilshan" />
   <meta property="og:url" content="https://dhanushka-dilshan.vercel.app/" />
   <meta property="og:title" content="Dhanushka Dilshan, software engineer" />
-  <meta property="og:description" content="Software engineer in Colombo building the Java and Spring Boot APIs behind XAPI: Business Lineage, data governance and the GraphQL in Practice series." />
+  <meta property="og:description" content="Software engineer in Colombo building the Java and Spring Boot APIs behind XAPI: Business Lineage, data governance and the GraphQL in Practice and Caching in Practice series." />
   <meta property="og:image" content="https://dhanushka-dilshan.vercel.app/og.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -97,7 +108,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
           <nav class="nav small" aria-label="Sections">
             <div class="nav__links">
               <a class="link" href="#work">Work</a>
-              <a class="link" href="#graphql-series">GraphQL series</a>
+              <a class="link" href="#graphql-series">Series</a>
               <a class="link" href="#about">About</a>
               <a class="link" href="#contact">Contact</a>
             </div>
@@ -187,44 +198,60 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       </div>
     </section>
 
+    <!-- SCENE: the caching series, same opening, on its own warm-dark ground -->
+    <section class="scene series series--cache" id="caching-series" data-scene="opening" data-options='{"hold":1.2}' aria-labelledby="cache-h">
+      <div class="scene-stage series__stage">
+        <ol class="series__cards" aria-label={'The ' + cacheSeries.length + ' episodes so far'} style={'--r5:' + Math.ceil(cacheSeries.length / 5) + ';--r3:' + Math.ceil(cacheSeries.length / 3)}>
+          {cacheSeries.map((s) => (
+            <li class="series__card" data-move><img src={F + 'cache' + s.n + '.jpg'} width="720" height="720" loading="lazy" alt={'Episode ' + s.n + ', ' + s.title} /></li>
+          ))}
+        </ol>
+        <div class="series__text" data-move>
+          <h2 class="head" id="cache-h">Caching in Practice</h2>
+          <p class="lead series__lead">A {cachePlanned}-part video series on caching with Spring, from the first cache hit to running it in production. Episode {cacheSeries.length} of {cachePlanned}, a new one every few days.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- SPLIT TWO -->
     <div class="split split--b" data-split>
       <div class="read">
 
         <section class="sec films" id="watch" data-stage={'ep' + firstEp} data-caption={epCaption(series[firstEp - 1])} data-films aria-labelledby="watch-h">
-          <h2 class="head" id="watch-h" data-reveal>Watch any part</h2>
-          <p class="muted films__sub" data-reveal style="--d:60ms">On LinkedIn from October 22 to November 5, 2026. Each part runs under a minute.</p>
+          <h2 class="head" id="watch-h" data-reveal>Watch any episode</h2>
+          <div class="tabs" role="tablist" aria-label="Series" data-reveal style="--d:40ms">
+            <button class="tab" type="button" role="tab" id="tab-graphql" aria-controls="list-graphql" aria-selected="true" data-tab="graphql">GraphQL</button>
+            <button class="tab" type="button" role="tab" id="tab-caching" aria-controls="list-caching" aria-selected="false" data-tab="caching" tabindex="-1">Caching</button>
+          </div>
+          <p class="muted films__sub" data-reveal data-list-sub="graphql" style="--d:60ms">On LinkedIn from October 22 to November 5, 2026. Each part runs under a minute.</p>
+          <p class="muted films__sub" data-list-sub="caching" hidden>On LinkedIn since November 10, 2026: episode {cacheSeries.length} of {cachePlanned}, a new one every few days.</p>
           <figure class="m-film m-only" data-reveal>
             <video data-films-player muted loop playsinline preload="none" poster={F + 'ep' + firstEp + '.jpg'} width="720" height="720" aria-hidden="true"><source src={F + 'ep' + firstEp + '.mp4'} type="video/mp4" /></video>
           </figure>
-          <ul class="eps" data-reveal style="--d:120ms">
+          <ul class="eps" id="list-graphql" role="tabpanel" aria-labelledby="tab-graphql" data-list="graphql" data-reveal style="--d:120ms">
             {series.map((s) => (
               <li>
-                <button class="ep" type="button" data-ep={s.n} data-caption={epCaption(s)} aria-pressed={s.n === firstEp ? 'true' : 'false'}>
+                <button class="ep" type="button" data-ep={'ep' + s.n} data-caption={epCaption(s)} aria-pressed={s.n === firstEp ? 'true' : 'false'}>
                   <span class="ep__dot" aria-hidden="true"></span>
                   <span class="ep__title">{s.title}<span class="ep__topic small muted">{s.topic}</span></span>
                   <span class="ep__date small muted">{s.date}</span>
                 </button>
+                <a class="ep__post small" href={postUrl(s.post)} target="_blank" rel="noopener" aria-label={'Part ' + s.n + ', ' + s.title + ', on LinkedIn (opens in a new tab)'}>LinkedIn ↗</a>
               </li>
             ))}
           </ul>
-        </section>
-
-        <section class="sec demo" id="demo" data-stage="ep1" data-caption="Part 1: Why GraphQL" data-query-demo aria-labelledby="demo-h">
-          <h2 class="head" id="demo-h" data-reveal>Ask for exactly what you need</h2>
-          <p class="muted demo__sub" data-reveal style="--d:60ms">Tick the fields you want. The response changes shape to match, the way GraphQL does.</p>
-          <div class="demo__body" data-reveal style="--d:120ms">
-            <fieldset class="demo__fields">
-              <legend class="sr-only">Fields to request</legend>
-              <label><input type="checkbox" value="name" checked /> name</label>
-              <label><input type="checkbox" value="role" checked /> role</label>
-              <label><input type="checkbox" value="stack" /> stack</label>
-              <label><input type="checkbox" value="projects" /> projects</label>
-              <label><input type="checkbox" value="writing" /> writing</label>
-            </fieldset>
-            <pre class="demo__pane"><code set:html={'query {\n  <span data-query-fields>name\n  role</span>\n}'} /></pre>
-            <pre class="demo__pane demo__pane--out"><code data-query-output>{'{ }'}</code></pre>
-          </div>
+          <ul class="eps" id="list-caching" role="tabpanel" aria-labelledby="tab-caching" data-list="caching" hidden>
+            {cacheSeries.map((s) => (
+              <li>
+                <button class="ep" type="button" data-ep={'cache' + s.n} data-caption={cacheCaption(s)} aria-pressed="false">
+                  <span class="ep__dot" aria-hidden="true"></span>
+                  <span class="ep__title">{s.title}<span class="ep__topic small muted">{s.topic}</span></span>
+                  <span class="ep__date small muted">{s.date}</span>
+                </button>
+                <a class="ep__post small" href={postUrl(s.post)} target="_blank" rel="noopener" aria-label={'Episode ' + s.n + ', ' + s.title + ', on LinkedIn (opens in a new tab)'}>LinkedIn ↗</a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section class="sec about" id="about" data-stage="about" data-caption="What I work with" aria-labelledby="about-h">
@@ -251,6 +278,11 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
         {series.map((s) => (
           <div class={'slide' + (s.n === firstEp ? ' is-on' : '')} data-slide={'ep' + s.n}>
             <div class="media film"><video muted loop playsinline preload="none" poster={F + 'ep' + s.n + '.jpg'} width="720" height="720"><source src={F + 'ep' + s.n + '.mp4'} type="video/mp4" /></video></div>
+          </div>
+        ))}
+        {cacheSeries.map((s) => (
+          <div class="slide slide--cache" data-slide={'cache' + s.n}>
+            <div class="media film"><video muted loop playsinline preload="none" poster={F + 'cache' + s.n + '.jpg'} width="720" height="720"><source src={F + 'cache' + s.n + '.mp4'} type="video/mp4" /></video></div>
           </div>
         ))}
         <div class="slide" data-slide="about">
@@ -289,7 +321,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       <p class="footer__name"><span class="lead">Dhanushka Dilshan</span><span class="small muted">Software engineer, Colombo</span></p>
       <nav class="footer__links" aria-label="Footer">
         <a class="link" href="#work">Work</a>
-        <a class="link" href="#graphql-series">GraphQL series</a>
+        <a class="link" href="#graphql-series">Series</a>
         <a class="link" href="#about">About</a>
         <a class="link" href="#contact">Contact</a>
         <a class="link" href={cvHref}>CV</a>
@@ -311,7 +343,6 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
   <script is:inline src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js" integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw" crossorigin="anonymous"></script>
   <script is:inline src="/scenes/stage.js"></script>
   <script is:inline src="/scripts/site.js"></script>
-  <script is:inline src="/scripts/query-demo.js" type="module"></script>
 
   <style is:global>
     /* ---------- the split ---------- */
@@ -383,6 +414,9 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     .series__text { text-align: center; max-width: 40ch; }
     .series__lead { margin-top: 18px; color: var(--muted); }
     html.js .series.is-live .series__stage { padding-block: clamp(32px, 5svh, 64px); }
+    /* the caching series keeps its own warm-dark ground, the one its videos are made on */
+    .series--cache, .slide--cache { background: #14110e; }
+    .series--cache .series__cards { --cols: 5; --rows: var(--r5); }
 
     /* ---------- films list ---------- */
     .films__sub { margin-top: 20px; max-width: 44ch; }
@@ -401,19 +435,22 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     @media (hover: hover) and (pointer: fine) { .ep:hover { transform: translateX(8px); } .ep:hover .ep__dot { background: var(--muted); } .ep[aria-pressed="true"]:hover .ep__dot { background: var(--accent); } }
     .ep:active { transform: scale(0.99); }
 
-    /* ---------- demo ---------- */
-    .demo__sub { margin-top: 20px; max-width: 44ch; }
-    .demo__body { margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 46rem; }
-    .demo__fields { grid-column: 1 / -1; border: 0; padding: 0; margin: 0 0 8px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .demo__fields label { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; background: var(--surface); cursor: pointer; transition: background-color var(--t-hover) ease; }
-    .demo__fields label:has(input:checked) { background: color-mix(in srgb, var(--accent) 18%, var(--surface)); }
-    .demo__fields input { accent-color: var(--accent); width: 18px; height: 18px; margin: 0; }
-    .demo__pane {
-      margin: 0; padding: 20px; min-height: 180px; background: var(--surface); color: var(--muted); overflow-x: auto;
-      /* taste-skill-ignore: real code (a GraphQL query and its response), set in <pre><code> */
-      font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 14px; line-height: 1.6;
+    /* ---------- series switch ---------- */
+    .tabs { margin-top: 28px; display: inline-flex; gap: 4px; padding: 4px; background: var(--surface); }
+    .tab {
+      min-height: 44px; padding: 0 18px; border: 0; background: none; color: var(--muted); cursor: pointer;
+      font: inherit; font-weight: 500; transition: background-color var(--t-hover) ease, color var(--t-hover) ease;
     }
-    .demo__pane--out { color: var(--accent); }
+    .tab[aria-selected="true"] { background: var(--bg); color: var(--ink); }
+    @media (hover: hover) and (pointer: fine) { .tab[aria-selected="false"]:hover { color: var(--ink); } }
+    .tab:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    [data-list][hidden], [data-list-sub][hidden] { display: none; }
+    .films[data-series="caching"] .m-film, .films[data-series="caching"] .m-film video { background: #14110e; }
+    .eps li { display: flex; align-items: center; gap: 18px; }
+    .eps .ep { flex: 1; min-width: 0; }
+    .ep__post { flex: none; display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; transition: color var(--t-hover) ease; }
+    @media (hover: hover) and (pointer: fine) { .ep__post:hover { color: var(--accent); } }
+    .ep__post:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
     /* ---------- about ---------- */
     .about__story { margin-top: 36px; max-width: 46ch; }
@@ -479,7 +516,6 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       .project { min-height: 0; padding: clamp(72px, 12vw, 96px) 0 0; }
       .project .m-film { margin-top: 0; margin-bottom: 28px; }
       .index { margin-top: 28px; }
-      .demo__body { grid-template-columns: 1fr; }
       .about__actions { padding-bottom: clamp(80px, 14vw, 112px); }
       .skill { grid-template-columns: 1fr; padding: 12px 0; }
       .about .m-film { margin-top: 20px; }
@@ -501,7 +537,8 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
       .intro .m-film { margin: 40px 0 0; padding: 0; align-self: start; }
       .intro__text { margin-top: 40px; }
       .films { display: grid; grid-template-columns: 1fr 1fr; column-gap: 32px; }
-      .films > .head, .films > .films__sub { grid-column: 1 / -1; }
+      .films > .head, .films > .films__sub, .films > .tabs { grid-column: 1 / -1; }
+      .films > .tabs { justify-self: start; }
       .films .m-film { margin: 36px 0 0; padding: 0; align-self: start; position: sticky; top: 24px; }
       .films .eps { margin-top: 36px; }
     }
@@ -515,6 +552,7 @@ const epCaption = (s) => `Part ${s.n}: ${s.title}`;
     @media (max-width: 767px) {
       .series__stage { padding: 72px 20px; }
       .series__cards { --cols: 2; --rows: 4; width: min(100%, calc((100svh - 300px) * var(--cols) / var(--rows)), 360px); }
+      .series--cache .series__cards { --cols: 3; --rows: var(--r3); }
       .series__lead { font-size: var(--step-body); }
     }
   </style>
