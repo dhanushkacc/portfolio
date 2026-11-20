@@ -130,6 +130,8 @@ const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
           </div>
         </header>
 
+        <div class="cam-room" aria-hidden="true"></div>
+
         <!-- INTRO -->
         <section class="sec intro" id="intro" data-stage="intro" data-caption="What I build">
           <h2 class="head" data-reveal>What I build</h2>
@@ -169,7 +171,17 @@ const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
 
       <div class="stage" aria-hidden="true">
         <div class="slide slide--photo is-on" data-slide="hero">
-          <img class="media" src="/media/portrait-tech.jpg" width="1024" height="1536" alt="" />
+          <!-- The camera: scrolling pushes in to the monitor behind me, and the "What I build" film starts on its screen. -->
+          <div class="media cam-wrap">
+            <div class="cam" data-cam>
+              <img class="cam__img" src="/media/portrait-tech.jpg" width="1024" height="1536" alt="" />
+              <span class="cam__glow cam__glow--a"></span>
+              <span class="cam__glow cam__glow--b"></span>
+              <span class="cam__veil" data-cam-veil></span>
+              <div class="cam__screen" data-cam-screen><video muted loop playsinline preload="none" poster={F + 'build.jpg'} width="720" height="720"><source src={F + 'build.mp4'} type="video/mp4" /></video></div>
+            </div>
+          </div>
+          <canvas class="cam__dust" data-dust></canvas>
         </div>
         <div class="slide" data-slide="intro">
           <div class="media film"><video muted loop playsinline preload="none" poster={F + 'build.jpg'} width="720" height="720"><source src={F + 'build.mp4'} type="video/mp4" /></video></div>
@@ -383,6 +395,30 @@ const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
       .js .split:first-child .slide--photo.is-on .media { animation: settle 1400ms var(--ease-expo) 80ms both; }
     }
     @keyframes stage-open { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+
+    /* ---------- hero camera: the photo is a room the scroll moves through ---------- */
+    .cam-wrap { overflow: visible; }
+    .cam { position: absolute; inset: 0; transform-origin: 0 0; will-change: transform; }
+    .cam__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; }
+    /* the monitor behind me, as a share of the photo (1024 x 1536): x 40-240, y 560-742 */
+    .cam__screen { position: absolute; left: 3.906%; top: 36.458%; width: 19.531%; height: 11.849%; opacity: 0; }
+    .cam__screen video { width: 100%; height: 100%; object-fit: contain; background: var(--stage); }
+    .cam__veil { position: absolute; inset: 0; background: var(--stage); opacity: 0; pointer-events: none; }
+    .cam__glow { position: absolute; border-radius: 50%; pointer-events: none; mix-blend-mode: screen; opacity: 0.35; }
+    .cam__glow--a { left: -6%; top: 24%; width: 34%; height: 6%; background: radial-gradient(closest-side, rgba(56, 189, 248, 0.55), transparent); }
+    .cam__glow--b { left: 86%; top: 2%; width: 16%; height: 36%; background: radial-gradient(closest-side, rgba(168, 85, 247, 0.45), transparent); }
+    .cam__dust { position: absolute; inset: 0 0 56px 0; width: 100%; height: calc(100% - 56px); pointer-events: none; }
+    @media (prefers-reduced-motion: no-preference) {
+      .js .cam__glow--a { animation: hum 5.5s ease-in-out infinite; }
+      .js .cam__glow--b { animation: hum 7s ease-in-out -2.5s infinite; }
+    }
+    @keyframes hum { 0%, 100% { opacity: 0.25; } 45% { opacity: 0.55; } 60% { opacity: 0.4; } }
+    /* the hero-to-intro hand-off is one continuous camera move, so that pair swaps without the wipe */
+    /* give the camera move room to breathe: the intro starts a little lower while the move runs */
+    .cam-room { display: none; }
+    @media (min-width: 1024px) { html.cam-on .cam-room { display: block; height: 55svh; } }
+    .stage.is-seamless .slide.is-on { transition: none; }
+    .stage.is-seamless .slide.is-on .media { animation: none; }
     @keyframes settle { from { transform: scale(1.1); } to { transform: none; } }
 
     /* ---------- reading sections ---------- */
