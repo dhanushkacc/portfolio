@@ -54,6 +54,7 @@ const cacheSeries = [
   { n: 3, title: 'Cache-aside', topic: 'Check, load, store', date: 'Nov 18', length: '0:43', post: '7528636586905845760' },
   { n: 4, title: 'Three ways to write', topic: 'Safe, fast, selective', date: 'Nov 19', length: '0:54', post: '7529018952472002560' },
   { n: 5, title: 'Spring caching in 60 seconds', topic: 'Four annotations', date: 'Nov 20', length: '0:59', post: '7529534035077869568' },
+  { n: 6, title: "Spring's silent traps", topic: 'Four quiet failures', date: 'Nov 21', length: '0:55', post: '7529898856067735552' },
 ];
 const cachePlanned = 20;
 const postUrl = (id) => `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`;
@@ -213,7 +214,7 @@ const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
     <!-- SCENE: the caching series, same opening, on its own warm-dark ground -->
     <section class="scene series series--cache" id="caching-series" data-scene="opening" data-options='{"hold":1.2}' aria-labelledby="cache-h">
       <div class="scene-stage series__stage">
-        <ol class="series__cards" aria-label={'The ' + cacheSeries.length + ' episodes so far'} style={'--r5:' + Math.ceil(cacheSeries.length / 5) + ';--r3:' + Math.ceil(cacheSeries.length / 3)}>
+        <ol class="series__cards" aria-label={'The ' + cacheSeries.length + ' episodes so far'} style={'--c5:' + (cacheSeries.length <= 6 ? cacheSeries.length : 5) + ';--r5:' + Math.ceil(cacheSeries.length / (cacheSeries.length <= 6 ? cacheSeries.length : 5)) + ';--r3:' + Math.ceil(cacheSeries.length / 3)}>
           {cacheSeries.map((s) => (
             <li class="series__card" data-move><img src={F + 'cache' + s.n + '.jpg'} width="720" height="720" loading="lazy" alt={'Episode ' + s.n + ', ' + s.title} /></li>
           ))}
@@ -452,7 +453,7 @@ const cacheCaption = (s) => `Caching, episode ${s.n}: ${s.title}`;
     html.js .series.is-live .series__stage { padding-block: clamp(32px, 5svh, 64px); }
     /* the caching series keeps its own warm-dark ground, the one its videos are made on */
     .series--cache, .slide--cache { background: #14110e; }
-    .series--cache .series__cards { --cols: 5; --rows: var(--r5); }
+    .series--cache .series__cards { --cols: var(--c5); --rows: var(--r5); }
 
     /* ---------- films list ---------- */
     .films__sub { margin-top: 20px; max-width: 44ch; }
